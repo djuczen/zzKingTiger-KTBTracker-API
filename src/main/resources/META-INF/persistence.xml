@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="3.0"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+    <persistence-unit name="KTBTrackerAPI">
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Cycle</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.MentorChecks</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Metadata</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.ParentChecks</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Tracking</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.User</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.UserGroup</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="eclipselink.target-database" value="MySQL"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.level.sql" value="OFF"/>
+            <property name="eclipselink.logging.parameters" value="false"/>
+            <property name="eclipselink.ddlgen-terminate-statements" value="true"/>
+            <!-- JPA 3.x -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.scripts.create-target"
+                      value="../../../../createDDL.sql"/>
+            <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="../../../../dropDDL.sql"/>
+            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/load-script.sql"/>
+            <!-- JPA 2.x -->
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
+            <property name="javax.persistence.schema-generation.scripts.create-target"
+                      value="../../../../createDDL.sql"/>
+            <property name="javax.persistence.schema-generation.scripts.drop-target" value="../../../../dropDDL.sql"/>
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/load-script.sql"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,8 @@
+//
+// Repositories
+//
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}

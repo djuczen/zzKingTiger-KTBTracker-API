@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JpbDataSourceConfig">
+    <data-sources>
+      <data-source id="60824f83-189e-46f8-b24b-4f54386aab04" name="KTBTrackerAPI" url="jdbc:mysql://localhost/KTBTracker?useSSL=false&amp;allowMultiQueries=true&amp;serverTimezone=UTC" driverClass="com.mysql.cj.jdbc.Driver" />
+    </data-sources>
+    <data-source-infos>
+      <data-source-info id="60824f83-189e-46f8-b24b-4f54386aab04" persistence-unit-name="KTBTraclerAPI" />
+      <data-source-info id="60824f83-189e-46f8-b24b-4f54386aab04" persistence-unit-name="Default" />
+      <data-source-info id="60824f83-189e-46f8-b24b-4f54386aab04" persistence-unit-name="KTBTrackerAPI" />
+    </data-source-infos>
+  </component>
+</project>

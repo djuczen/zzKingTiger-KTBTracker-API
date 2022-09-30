@@ -1,0 +1,36 @@
+
+group "com.affiancesolutions.kingtigerr"
+description "King Tiger Black Belt Tracker API"
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+ext {
+    jacocoVersion ="0.8.7"
+    junit5Version = "[5.8.1,)"
+    microshedVersion = "[0.9.1,)"
+    resteasyVersion = "[6.1.0.Final,)"
+    resteasyMicroProfileVersion = "[1.0.0.Final,)"
+}
+
+// Pull in common repositories...
+apply from: "${rootDir}/gradle/repositories.gradle"
+
+//
+// Java Application Archive (JAR) Dependencies
+//
+dependencies {
+    // Provided APIs
+    compileOnly "org.eclipse.microprofile:microprofile:5.0"
+    compileOnly "jakarta.platform:jakarta.jakartaee-api:9.0.0"
+}
+
+publishing {
+    publications {
+        javaArchive(MavenPublication) {
+            groupId 'com.affiancesolutions.kingtiger'
+            artifactId 'ktbtracker.commons'
+            from components.java
+        }
+    }
+}
