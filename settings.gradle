@@ -7,9 +7,6 @@
  * in the user manual at https://docs.gradle.org/7.0/userguide/multi_project_builds.html
  */
 
-rootProject.name = 'KTBTrackerAPI'
-//include('app', 'list', 'utilities')
-include 'web-ui'
+rootProject.name = 'KingTiger-KTBTracker-API'
 include 'ktbtracker-api'
 include 'commons'
-
