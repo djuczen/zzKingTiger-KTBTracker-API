@@ -6,6 +6,8 @@ import org.eclipse.microprofile.jwt.JsonWebToken;
 import java.security.Principal;
 import java.util.logging.Logger;
 
+import static com.affiancesolutions.kingtiger.ktbtracker.server.Constants.ALL_AUTHENTICATED;
+
 public class MicroProfileSecurityContextImpl implements SecurityContext {
 
     private static final String CLASS_NAME = MicroProfileSecurityContextImpl.class.getName();
@@ -14,12 +16,9 @@ public class MicroProfileSecurityContextImpl implements SecurityContext {
 
     private final SecurityContext securityContext;
 
-    private final JsonWebToken jsonWebToken;
 
-
-    public MicroProfileSecurityContextImpl(SecurityContext securityContext, JsonWebToken jsonWebToken) {
+    public MicroProfileSecurityContextImpl(SecurityContext securityContext) {
         this.securityContext = securityContext;
-        this.jsonWebToken = jsonWebToken;
     }
 
     /**
@@ -32,7 +31,7 @@ public class MicroProfileSecurityContextImpl implements SecurityContext {
      */
     @Override
     public Principal getUserPrincipal() {
-        return jsonWebToken != null ? jsonWebToken : securityContext.getUserPrincipal();
+        return securityContext.getUserPrincipal();
     }
 
     /**
@@ -46,14 +45,10 @@ public class MicroProfileSecurityContextImpl implements SecurityContext {
      */
     @Override
     public boolean isUserInRole(String role) {
-        boolean userInRole = getUserPrincipal() != null && "**".equals(role);
+        boolean userInRole = getUserPrincipal() != null && ALL_AUTHENTICATED.equals(role);
 
         if (!userInRole && getUserPrincipal() != null) {
-            if (getUserPrincipal() instanceof JsonWebToken) {
-                userInRole = ((JsonWebToken) getUserPrincipal()).getGroups().contains(role);
-            } else {
-                userInRole = securityContext.isUserInRole(role);
-            }
+            userInRole = securityContext.isUserInRole(role);
         }
 
         return userInRole;

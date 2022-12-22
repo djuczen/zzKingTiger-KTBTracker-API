@@ -5,17 +5,15 @@ import com.affiancesolutions.kingtiger.ktbtracker.server.model.Metadata;
 import jakarta.annotation.Resource;
 import jakarta.ejb.SessionContext;
 import jakarta.ejb.Stateless;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceException;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
-public class CyclesDAO extends DataAccessObject<Cycle, Long> {
+public class CyclesDAO extends DataAccessObject<Cycle, Integer> {
 
     private static final String CLASS_NAME = CyclesDAO.class.getName();
 
@@ -42,7 +40,7 @@ public class CyclesDAO extends DataAccessObject<Cycle, Long> {
         final String METHOD_NAME = "update";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, cycle);
 
-        cycle.setMetaData(new Metadata(sessionContext.getCallerPrincipal().getName()));
+        cycle.setMetadata(new Metadata(sessionContext.getCallerPrincipal().getName()));
 
         Cycle result = super.update(cycle);
 
@@ -60,7 +58,7 @@ public class CyclesDAO extends DataAccessObject<Cycle, Long> {
         LOGGER.exiting(CLASS_NAME, METHOD_NAME);
     }
 
-    public Cycle find(Long id) throws PersistenceException {
+    public Cycle find(int id) throws PersistenceException {
         final String METHOD_NAME = "find";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, id);
 
@@ -132,11 +130,33 @@ public class CyclesDAO extends DataAccessObject<Cycle, Long> {
     }
 
     @PrePersist
-    public void onPrePersist(Cycle cycle) {
-        final String METHOD_NAME = "onPrePersist";
+    public void onCreate(Cycle cycle) {
+        final String METHOD_NAME = "onCreate";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, cycle);
 
-        LOGGER.fine(String.format("Cycle: %s, SecurityContext: %s, Principal: %s", cycle, sessionContext, sessionContext.getCallerPrincipal().getName()));
+        // Update the cycle metadata with the "created" timestamp
+        cycle.getMetadata().setCreated(LocalDateTime.now());
+
+        // If the caller principal is available update the "created by" user
+        if (sessionContext != null && sessionContext.getCallerPrincipal() != null) {
+            cycle.getMetadata().setCreatedBy(sessionContext.getCallerPrincipal().getName());
+        }
+
+        LOGGER.exiting(CLASS_NAME, METHOD_NAME);
+    }
+
+    @PreUpdate
+    public void onUpdate(Cycle cycle) {
+        final String METHOD_NAME = "onUpdate";
+        LOGGER.entering(CLASS_NAME, METHOD_NAME, cycle);
+
+        // Update the cycle metadata with the "modified" timestamp
+        cycle.getMetadata().setModified(LocalDateTime.now());
+
+        // If the caller principal is available update the "modified by" user
+        if (sessionContext != null && sessionContext.getCallerPrincipal() != null) {
+            cycle.getMetadata().setModifiedBy(sessionContext.getCallerPrincipal().getName());
+        }
 
         LOGGER.exiting(CLASS_NAME, METHOD_NAME);
     }

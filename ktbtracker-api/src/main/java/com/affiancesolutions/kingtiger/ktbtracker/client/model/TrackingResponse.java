@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class Tracking implements Serializable {
+public class TrackingResponse implements Serializable {
 
     /**
      * Versioning UID for serialization.
@@ -29,13 +29,16 @@ public class Tracking implements Serializable {
     /**
      * The candidate that is being tracked (this along with the tracking date form a unique index).
      */
-    private String candidate;
+    private int candidateId;
 
     /**
-     * Object Relational Model (ORM) relationship to the cycle (Cycle) being tracked.
+     * The cycle that is being tracked.
      */
-    private Cycle cycle;
+    private int cycleId;
 
+    /**
+     * The requirements being tracked.
+     */
     private Requirements requirements = new Requirements();
 
     /**
@@ -59,22 +62,29 @@ public class Tracking implements Serializable {
         this.trackingDate = trackingDate;
     }
 
-    public String getCandidate() {
-        return candidate;
+    public int getCandidateId() {
+        return candidateId;
     }
 
-    public void setCandidate(String candidate) {
-        this.candidate = candidate;
+    public void setCandidateId(int candidateId) {
+        this.candidateId = candidateId;
     }
 
-    public Cycle getCycle() {
-        return cycle;
+    public int getCycleId() {
+        return cycleId;
     }
 
-    public void setCycle(Cycle cycle) {
-        this.cycle = cycle;
+    public void setCycleId(int cycleId) {
+        this.cycleId = cycleId;
     }
 
+    public Requirements getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(Requirements requirements) {
+        this.requirements = requirements;
+    }
 
     public Metadata getMetadata() {
         return metadata;

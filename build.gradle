@@ -48,14 +48,18 @@ allprojects {
 // Web Application Archive (WAR) Dependencies
 //
 dependencies {
+    // Google Firebase Bill of Materials (BOM)
+    //implementation platform('com.google.firebase:firebase-bom:31.1.0')
+
     // Intra-Project Dependencies (WEB-INF/lib)
     implementation project(':commons')
     implementation project(':ktbtracker-api')
 
     // Third-Party APIs (WEB-INF/lib)
-    implementation group: 'com.google.firebase', name: 'firebase-admin', version: '9.0.0'
-    implementation group: 'org.bitbucket.b_c', name: 'jose4j', version: '0.8.0'
-    implementation "org.slf4j:slf4j-jdk14:1.7.36"
+    //implementation 'com.google.firebase:firebase-core'
+    implementation 'com.google.firebase:firebase-admin:[9.0.0,)'
+    //implementation group: 'org.bitbucket.b_c', name: 'jose4j', version: '0.8.0'
+    implementation "org.slf4j:slf4j-jdk14:[1.7.36,)"
 
     // Provided APIs
     providedCompile "org.eclipse.microprofile:microprofile:5.0"
@@ -80,7 +84,7 @@ dependencies {
     libertyRuntime "io.openliberty:openliberty-runtime:[22.0.0.1,)"
 
     // JDBC Driver (Only ONE can be active!)
-    jdbcDriver "mysql:mysql-connector-java:[8.0.29,)"
+    jdbcDriver "mysql:mysql-connector-java:8.0.30"
 
     // JAR(s) to be copied into ${shared.config.dir}/lib/global
 }
@@ -117,9 +121,9 @@ liberty {
                 'HTTPS_PORT'                        : "${https_port}",
                 'SEC_SSO_REDIRECTTORPHOSTANDPORT'   : "http://localhost:${http_port}",
 
-                'SEC_SSO_OIDC_CLIENTID'             : "kingtigerblackbelt.com",
+                'SEC_SSO_OIDC_CLIENTID'             : "kingtiger-ktbtracker",
                 'SEC_SSO_OIDC_CLIENTSECRET'         : "72898b92-8257-4637-9102-01027a5ce9fd",
-                'SEC_SSO_OIDC_DISCOVERYENDPOINT'    : "https://auth.kingtigerblackbelt.com/auth/realms/master/.well-known/openid-configuration",
+                'SEC_SSO_OIDC_DISCOVERYENDPOINT'    : "http://localhost:40480/realms/ktbtracker/.well-known/openid-configuration",
                 'JDBC_DRIVER_PATH'                  : layout.buildDirectory.dir("libs/jdbc").get().asFile,
         ]
     }

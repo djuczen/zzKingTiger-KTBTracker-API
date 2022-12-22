@@ -141,7 +141,7 @@ public class Requirements {
      *
      * @since 2.0.0
      */
-    @Column(name = "MEDITATION", nullable = false)
+    @Column(name = "MEDITATION", nullable = false, columnDefinition = "DECIMAL(10,2)")
     private double meditation;
 
     /**
@@ -172,6 +172,62 @@ public class Requirements {
     @Column(name = "LEADERSHIP2", nullable = false)
     private int leadership2;
 
+    @Column(name = "JOURNALS", nullable = false)
+    private int journals;
+
+    public Requirements() {}
+
+    public Requirements(double miles,
+                        int pushUps,
+                        int sitUps,
+                        int burpees,
+                        int kicks,
+                        int poomsae,
+                        int selfDefense,
+                        double sparring,
+                        double jumps,
+                        int pullUps,
+                        int planks,
+                        int rollsFalls,
+                        int classSaturday,
+                        int classWeekday,
+                        int classPMAA,
+                        int classSparring,
+                        int classMasterQ,
+                        int classDreamTeam,
+                        int classHyperPro,
+                        double meditation,
+                        int randomActs,
+                        int mentor,
+                        int mentee,
+                        int leadership,
+                        int leadership2) {
+        this.miles = miles;
+        this.pushUps = pushUps;
+        this.sitUps = sitUps;
+        this.burpees = burpees;
+        this.kicks = kicks;
+        this.poomsae = poomsae;
+        this.selfDefense = selfDefense;
+        this.sparring = sparring;
+        this.jumps = jumps;
+        this.pullUps = pullUps;
+        this.planks = planks;
+        this.rollsFalls = rollsFalls;
+        this.classSaturday = classSaturday;
+        this.classWeekday = classWeekday;
+        this.classPMAA = classPMAA;
+        this.classSparring = classSparring;
+        this.classMasterQ = classMasterQ;
+        this.classDreamTeam = classDreamTeam;
+        this.classHyperPro = classHyperPro;
+        this.meditation = meditation;
+        this.randomActs = randomActs;
+        this.mentor = mentor;
+        this.mentee = mentee;
+        this.leadership = leadership;
+        this.leadership2 = leadership2;
+    }
 
     public double getMiles() {
         return miles;
@@ -371,5 +427,13 @@ public class Requirements {
 
     public void setLeadership2(int leadership2) {
         this.leadership2 = leadership2;
+    }
+
+    public int getJournals() {
+        return journals;
+    }
+
+    public void setJournals(int journals) {
+        this.journals = journals;
     }
 }

@@ -22,7 +22,7 @@ public class ParentChecks implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
-    private Long id;
+    private int id;
 
     /**
      * Object Relationship Mapping (ORM) many-to-one relationship to the candidate (Candidate) being checked.
@@ -79,11 +79,11 @@ public class ParentChecks implements Serializable {
     @Embedded
     private Metadata metadata = new Metadata();
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

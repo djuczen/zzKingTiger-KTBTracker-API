@@ -32,7 +32,7 @@ public class UserGroup implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
-    private Long id;
+    private int id;
 
     /**
      * The title (or name) of the user group.
@@ -59,11 +59,11 @@ public class UserGroup implements Serializable {
     })
     private Set<User> users = new HashSet<>();
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

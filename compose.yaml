@@ -1,0 +1,37 @@
+
+services:
+  ktbtracker-db:
+    container_name: ktbtracker-db
+    image: bitnami/mysql:latest
+    restart: always
+    ports:
+      - "40136:3306"
+      - "40160:33060"
+    env_file: ktbtracker-db.env
+    volumes:
+      - ./mysql-db:/bitnami/mysql/data
+      - ./ktbtracker_20221204.sql:/docker-entrypoint-initdb.d/ktbtracker_20221204.sql
+    networks:
+      - ktbtracker-net
+
+  ktbtracker-api:
+    container_name: ktbtracker-api
+    image: ktbtracker-api
+    build:
+      context: .
+    restart: always
+    ports:
+      - "40182:9080"
+      - "40145:9443"
+    env_file: ktbtracker-db.env
+    volumes:
+      - /etc/pki/tls/private/kingtigerblackbelt.com.key:/etc/x509/certs/tls.key:ro
+      - /etc/pki/tls/certs/kingtigerblackbelt.com.bundle:/etc/x509/certs/tls.crt:ro
+    depends_on:
+      - ktbtracker-db
+    networks:
+      - ktbtracker-net
+
+networks:
+  ktbtracker-net:
+    driver: bridge

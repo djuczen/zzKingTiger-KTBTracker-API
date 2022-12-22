@@ -1,35 +1,24 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.auth;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.auth.impl.MicroProfileJsonWebTokenImpl;
 import com.affiancesolutions.kingtiger.ktbtracker.server.auth.impl.MicroProfileSecurityContextImpl;
-import com.google.firebase.auth.FirebaseAuth;
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.Priorities;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.container.PreMatching;
-import jakarta.ws.rs.container.ResourceInfo;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.HttpHeaders;
-import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.Provider;
-import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import java.io.IOException;
 import java.util.logging.Logger;
 
 @Provider
+@PreMatching
 @Priority(Priorities.AUTHENTICATION)
 public class KTBTrackerAuthorization implements ContainerRequestFilter {
 
     private static final String CLASS_NAME = KTBTrackerAuthorization.class.getName();
 
     private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
-
-    @Context
-    private ResourceInfo resourceInfo;
-
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     /**
      * Filter method called before a request has been dispatched to a resource.
@@ -52,21 +41,9 @@ public class KTBTrackerAuthorization implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         final String METHOD_NAME = "filter (Container Request Authentication)";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{requestContext});
-        String authorization = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-        JsonWebToken jsonWebToken = null;
 
-        if (authorization != null && authorization.contains("Bearer ")) {
-            String bearerToken = authorization.split("\\s+")[1];
+        requestContext.setSecurityContext(new MicroProfileSecurityContextImpl(requestContext.getSecurityContext()));
 
-            try {
-                jsonWebToken = new MicroProfileJsonWebTokenImpl(bearerToken);
-                LOGGER.finest(String.format("FKeycloak: %s", jsonWebToken.getName()));
-            } catch (Exception e) {
-                e.printStackTrace();
-                requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-            }
-        }
-
-        requestContext.setSecurityContext(new MicroProfileSecurityContextImpl(requestContext.getSecurityContext(), jsonWebToken));
+        LOGGER.exiting(CLASS_NAME, METHOD_NAME);
     }
 }

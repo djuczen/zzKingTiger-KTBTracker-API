@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Stateless
-public class UserGroupsDAO extends DataAccessObject<UserGroup, Long> {
+public class UserGroupsDAO extends DataAccessObject<UserGroup, Integer> {
 
     private static final String CLASS_NAME = UserGroupsDAO.class.getName();
 
@@ -90,7 +90,7 @@ public class UserGroupsDAO extends DataAccessObject<UserGroup, Long> {
         LOGGER.exiting(CLASS_NAME, METHOD_NAME);
     }
 
-    public UserGroup find(Long id) {
+    public UserGroup find(int id) {
         final String METHOD_NAME = "find";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, id);
 

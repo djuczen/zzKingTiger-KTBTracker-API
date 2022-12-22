@@ -4,7 +4,9 @@ import com.affiancesolutions.kingtiger.ktbtracker.client.model.Metadata;
 import com.affiancesolutions.kingtiger.ktbtracker.client.model.Requirements;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 
 public class Cycle implements Serializable {
@@ -127,6 +129,14 @@ public class Cycle implements Serializable {
 
     public void setMetaData(Metadata metadata) {
         this.metadata = metadata;
+    }
+
+    public int getCycleDays() {
+        return (int)(ChronoUnit.DAYS.between(cycleStart, cycleEnd));
+    }
+
+    public int getCycleDay() {
+        return (int)(ChronoUnit.DAYS.between(cycleStart, LocalDate.now()));
     }
 
     public String generateAlias(String title) {

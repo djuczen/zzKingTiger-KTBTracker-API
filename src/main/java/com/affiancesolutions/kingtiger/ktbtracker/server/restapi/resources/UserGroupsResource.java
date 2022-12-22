@@ -36,6 +36,11 @@ public class UserGroupsResource {
     @Inject
     private UserGroupsDAO userGroupsDAO;
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response listUserGroups() throws IOException {
@@ -48,6 +53,11 @@ public class UserGroupsResource {
         return Response.ok(resultList).build();
     }
 
+    /**
+     *
+     * @param userGroup
+     * @return
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,7 +77,7 @@ public class UserGroupsResource {
         }
 
         // Ensure the ID field is 0!
-        userGroup.setId(0L);
+        userGroup.setId(0);
 
         userGroup = userGroupsDAO.create(userGroup);
         URI location = uriInfo.getAbsolutePathBuilder().path(userGroup.getName()).build();
@@ -76,8 +86,14 @@ public class UserGroupsResource {
         return Response.created(location).build();
     }
 
+    /**
+     *
+     * @param groupName
+     * @return
+     * @throws IOException
+     */
     @GET
-    @Path("/{groupName}")
+    @Path("/{group}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserGroup(
             @PathParam(PARAM_GROUP_NAME) String groupName
@@ -91,8 +107,14 @@ public class UserGroupsResource {
         return Response.ok(result).build();
     }
 
+    /**
+     *
+     * @param groupName
+     * @param userGroup
+     * @return
+     */
     @PUT
-    @Path("/{groupName}")
+    @Path("/{group}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response updatetUserGroup(
@@ -107,7 +129,7 @@ public class UserGroupsResource {
 
         UserGroup result = userGroupsDAO.findByName(groupName);
         if (result == null) {
-            userGroup.setId(0L);
+            userGroup.setId(0);
             result = userGroupsDAO.create(userGroup);
         } else {
             userGroup.setId(result.getId());
@@ -118,8 +140,14 @@ public class UserGroupsResource {
         return Response.ok(result).build();
     }
 
+    /**
+     *
+     * @param groupName
+     * @return
+     * @throws IOException
+     */
     @DELETE
-    @Path("/{groupName}")
+    @Path("/{group}")
     @Transactional
     public Response deleteUserGroup(
             @PathParam(PARAM_GROUP_NAME) String groupName

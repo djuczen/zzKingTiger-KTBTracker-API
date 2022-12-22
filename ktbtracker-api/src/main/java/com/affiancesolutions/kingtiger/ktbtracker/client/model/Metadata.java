@@ -1,5 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.client.model;
 
+import jakarta.json.bind.annotation.JsonbDateFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PrePersist;
@@ -19,6 +20,7 @@ public class Metadata implements Serializable {
     /**
      * The timestamp of when the entity record was created.
      */
+    @JsonbDateFormat("uuuu-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime created;
 
     /**
@@ -29,6 +31,7 @@ public class Metadata implements Serializable {
     /**
      * The timestamp of when the entity record was last modified.
      */
+    @JsonbDateFormat("uuuu-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime modified;
 
     /**

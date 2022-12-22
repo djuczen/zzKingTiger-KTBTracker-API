@@ -1,13 +1,13 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.jpa.MetadataListener;
+import jakarta.json.bind.annotation.JsonbDateFormat;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@EntityListeners(MetadataListener.class)
 @Embeddable
 public class Metadata implements Serializable {
 
@@ -20,6 +20,7 @@ public class Metadata implements Serializable {
      * The timestamp of when the entity record was created.
      */
     @Column(name = "CREATED")
+    @JsonbDateFormat("uuuu-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime created;
 
     /**
@@ -32,6 +33,7 @@ public class Metadata implements Serializable {
      * The timestamp of when the entity record was last modified.
      */
     @Column(name = "MODIFIED")
+    @JsonbDateFormat("uuuu-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime modified;
 
     /**
@@ -40,6 +42,13 @@ public class Metadata implements Serializable {
     @Column(name = "MODIFIED_BY")
     private String modifiedBy;
 
+
+    @Column(name = "CHECKED_OUT")
+    private String checkedOut;
+
+    @Column(name = "CHECKED_OUT_TIME")
+    @JsonbDateFormat("uuuu-MM-dd'T'HH:mm:ss'Z'")
+    private LocalDateTime checkedOutTime;
 
     /**
      * Default no-argument constructor.
@@ -135,13 +144,19 @@ public class Metadata implements Serializable {
         this.modifiedBy = modifiedBy;
     }
 
-    @PrePersist
-    public void prePersist() {
-        this.created = LocalDateTime.now();
+    public String getCheckedOut() {
+        return checkedOut;
     }
 
-    @PreUpdate
-    public void preUpdate() {
-        this.modified = LocalDateTime.now();
+    public void setCheckedOut(String checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
+    public LocalDateTime getCheckedOutTime() {
+        return checkedOutTime;
+    }
+
+    public void setCheckedOutTime(LocalDateTime checkedOutTime) {
+        this.checkedOutTime = checkedOutTime;
     }
 }

@@ -40,7 +40,7 @@ public class Cycle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
-    private Long id;
+    private int id;
 
     /**
      * Title assigned to the cycle, typically {Spring|Fall} 20XX.
@@ -76,6 +76,12 @@ public class Cycle implements Serializable {
     private LocalDate cyclePostEnd;
 
     /**
+     * The day of the week when a cycle week begins, 0 = Sunday, 6 = Saturday.
+     */
+    @Column(name = "CYCLE_WEEK_START", nullable = false)
+    private Integer cycleWeekStart;
+
+    /**
      * Requirements (physical, classes, other) for the cycle. These particular values indicate the "goal" to be
      * reached for each requirement, with a 0 value meaning it is not required.
      */
@@ -88,11 +94,11 @@ public class Cycle implements Serializable {
     @Embedded
     private Metadata metadata = new Metadata();
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -144,6 +150,14 @@ public class Cycle implements Serializable {
         this.cyclePostEnd = cyclePostEnd;
     }
 
+    public Integer getCycleWeekStart() {
+        return cycleWeekStart;
+    }
+
+    public void setCycleWeekStart(Integer cycleWeekStart) {
+        this.cycleWeekStart = cycleWeekStart;
+    }
+
     public Requirements getRequirements() {
         return requirements;
     }
@@ -156,7 +170,7 @@ public class Cycle implements Serializable {
         return metadata;
     }
 
-    public void setMetaData(Metadata metadata) {
+    public void setMetadata(Metadata metadata) {
         this.metadata = metadata;
     }
 
