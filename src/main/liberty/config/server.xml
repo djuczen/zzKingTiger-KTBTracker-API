@@ -44,28 +44,30 @@
             audiences="ktbtracker-1659484356633">
     </mpJwt>
 
-    <library id="MYSQL_JDBC_DRIVER">
+    <library id="JDBC_DRIVER">
         <fileset dir="${shared.config.dir}/lib/jdbc" includes="*.jar"/>
     </library>
     <dataSource id="DefaultDataSource">
-        <jdbcDriver libraryRef="MYSQL_JDBC_DRIVER"/>
-        <properties serverName="${mysql.client.database.host}" portNumber="${mysql.client.database.port.number}"
-                    databaseName="${mysql.database}" user="${mysql.user}" password="${mysql.password}"
+        <jdbcDriver libraryRef="JDBC_DRIVER"/>
+        <properties serverName="${database.host}" portNumber="${database.port}"
+                    databaseName="${database.name}" user="${database.user}" password="${database.password}"
                     useSSL="false" allowMultiQueries="true" serverTimezone="UTC" allowPublicKeyRetrieval="true"
                     zeroDateTimeBehavior="CONVERT_TO_NULL"/>
     </dataSource>
 
     <jpa>
         <defaultProperties>
-            <property name="eclipselink.target-database" value="MySQL"/>
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
             <property name="eclipselink.logging.level.sql" value="FINE"/>
             <property name="eclipselink.logging.parameters" value="true"/>
+            <!--
+            <property name="eclipselink.application-location" value="${user.dir}"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="sql-script"/>
+            <property name="eclipselink.create-ddl-jdbc-file-name" value="createDDL.sql"/>
+            <property name="eclipselink.drop-ddl-jdbc-file-name" value="dropDDL.sql"/>
+            <property name="eclipselink.target-database" value="PostgreSQL"/>-->
             <property name="eclipselink.ddlgen-terminate-statements" value="true"/>
-
-            <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
-            <property name="jakarta.persistence.schema-generation.scripts.create-target" value="../../../../createDDL.sql"/>
-            <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="../../../../dropDDL.sql"/>
-
         </defaultProperties>
     </jpa>
 <!--

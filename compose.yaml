@@ -2,15 +2,23 @@
 services:
   ktbtracker-db:
     container_name: ktbtracker-db
-    image: bitnami/mysql:latest
+    image: postgres
     restart: always
     ports:
-      - "40136:3306"
-      - "40160:33060"
+      - "40132:5432"
     env_file: ktbtracker-db.env
     volumes:
-      - ./mysql-db:/bitnami/mysql/data
-      - ./ktbtracker_20221204.sql:/docker-entrypoint-initdb.d/ktbtracker_20221204.sql
+      - ./pgdata:/var/lib/postgresql/data
+    networks:
+      - ktbtracker-net
+
+  ktbtracker-dbadmin:
+    container_name: ktbtracker-dbadmin
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "40180:80"
+    env_file: ktbtracker-db.env
     networks:
       - ktbtracker-net
 

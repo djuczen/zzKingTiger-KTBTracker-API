@@ -13,7 +13,7 @@ public class Requirements {
     /**
      * Count of miles run/walked by the candidate.
      */
-    @Column(name = "MILES", nullable = false, columnDefinition = "DECIMAL(10,2)")
+    @Column(name = "MILES", nullable = false)
     private double miles;
 
     /**
@@ -55,13 +55,13 @@ public class Requirements {
     /**
      * Count of 90-second sparring rounds performed by the candidate.
      */
-    @Column(name = "SPARRING", nullable = false, columnDefinition = "DECIMAL(10,2)")
+    @Column(name = "SPARRING", nullable = false)
     private double sparring;
 
     /**
      * Count of 1-minute jump-rope sessions performed by the candidate.
      */
-    @Column(name = "JUMPS", nullable = false, columnDefinition = "DECIMAL(10,2)")
+    @Column(name = "JUMPS", nullable = false)
     private double jumps;
 
     /**
@@ -141,13 +141,13 @@ public class Requirements {
      *
      * @since 2.0.0
      */
-    @Column(name = "MEDITATION", nullable = false, columnDefinition = "DECIMAL(10,2)")
+    @Column(name = "MEDITATION", nullable = false)
     private double meditation;
 
     /**
      * Count of Random Acts of Kindness (RAOK) performed by the candidate @since 1.0.0
      */
-    @Column(name = "RAOK", nullable = false, columnDefinition = "INT(11)")
+    @Column(name = "RAOK", nullable = false)
     private int randomActs;
 
     /**

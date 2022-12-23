@@ -62,10 +62,10 @@ public class JournalPost implements Serializable {
     @Column(name = "ALIAS", nullable = false)
     private String alias;
 
-    @Column(name = "SLUG", columnDefinition = "VARCHAR(100)", nullable = false)
+    @Column(name = "SLUG", nullable = false, columnDefinition = "VARCHAR(100)")
     private String slug;
 
-    @Column(name = "SUMMARY", columnDefinition = "TINYTEXT")
+    @Column(name = "SUMMARY")
     private String summary;
 
     @Column(name = "PUBLISHED", nullable = false)
