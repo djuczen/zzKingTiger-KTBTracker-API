@@ -166,57 +166,57 @@ public class Statistics implements Serializable {
     public Statistics() {
     }
 
-    public Statistics(BigDecimal miles,
-                      BigDecimal pushUps,
-                      BigDecimal sitUps,
-                      BigDecimal burpees,
-                      BigDecimal kicks,
-                      BigDecimal poomsae,
-                      BigDecimal selfDefense,
-                      BigDecimal sparring,
-                      BigDecimal jumps,
-                      BigDecimal pullUps,
-                      BigDecimal planks,
-                      BigDecimal rollsFalls,
-                      BigDecimal classSaturday,
-                      BigDecimal classWeekday,
-                      BigDecimal classPMAA,
-                      BigDecimal classSparring,
-                      BigDecimal classMasterQ,
-                      BigDecimal classDreamTeam,
-                      BigDecimal classHyperPro,
-                      BigDecimal meditation,
-                      BigDecimal randomActs,
-                      BigDecimal mentor,
-                      BigDecimal mentee,
-                      BigDecimal leadership,
-                      BigDecimal leadership2,
-                      Long journals) {
-        this.miles = miles.doubleValue();
-        this.pushUps = pushUps.doubleValue();
-        this.sitUps = sitUps.doubleValue();
-        this.burpees = burpees.doubleValue();
-        this.kicks = kicks.doubleValue();
-        this.poomsae = poomsae.doubleValue();
-        this.selfDefense = selfDefense.doubleValue();
-        this.sparring = sparring.doubleValue();
-        this.jumps = jumps.doubleValue();
-        this.pullUps = pullUps.doubleValue();
-        this.planks = planks.doubleValue();
-        this.rollsFalls = rollsFalls.doubleValue();
-        this.classSaturday = classSaturday.doubleValue();
-        this.classWeekday = classWeekday.doubleValue();
-        this.classPMAA = classPMAA.doubleValue();
-        this.classSparring = classSparring.doubleValue();
-        this.classMasterQ = classMasterQ.doubleValue();
-        this.classDreamTeam = classDreamTeam.doubleValue();
-        this.classHyperPro = classHyperPro.doubleValue();
-        this.meditation = meditation.doubleValue();
-        this.randomActs = randomActs.doubleValue();
-        this.mentor = mentor.doubleValue();
-        this.mentee = mentee.doubleValue();
-        this.leadership = leadership.doubleValue();
-        this.leadership2 = leadership2.doubleValue();
+    public Statistics(double miles,
+                      double pushUps,
+                      double sitUps,
+                      double burpees,
+                      double kicks,
+                      double poomsae,
+                      double selfDefense,
+                      double sparring,
+                      double jumps,
+                      double pullUps,
+                      double planks,
+                      double rollsFalls,
+                      double classSaturday,
+                      double classWeekday,
+                      double classPMAA,
+                      double classSparring,
+                      double classMasterQ,
+                      double classDreamTeam,
+                      double classHyperPro,
+                      double meditation,
+                      double randomActs,
+                      double mentor,
+                      double mentee,
+                      double leadership,
+                      double leadership2,
+                      long journals) {
+        this.miles = miles;
+        this.pushUps = pushUps;
+        this.sitUps = sitUps;
+        this.burpees = burpees;
+        this.kicks = kicks;
+        this.poomsae = poomsae;
+        this.selfDefense = selfDefense;
+        this.sparring = sparring;
+        this.jumps = jumps;
+        this.pullUps = pullUps;
+        this.planks = planks;
+        this.rollsFalls = rollsFalls;
+        this.classSaturday = classSaturday;
+        this.classWeekday = classWeekday;
+        this.classPMAA = classPMAA;
+        this.classSparring = classSparring;
+        this.classMasterQ = classMasterQ;
+        this.classDreamTeam = classDreamTeam;
+        this.classHyperPro = classHyperPro;
+        this.meditation = meditation;
+        this.randomActs = randomActs;
+        this.mentor = mentor;
+        this.mentee = mentee;
+        this.leadership = leadership;
+        this.leadership2 = leadership2;
         this.journals = journals;
     }
 

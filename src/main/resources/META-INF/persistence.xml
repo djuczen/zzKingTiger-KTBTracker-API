@@ -22,19 +22,18 @@
 
         <properties>
             <!-- JPA 3.x -->
-            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
             <property name="jakarta.persistence.schema-generation.create-source" value="metadata"/>
             <property name="jakarta.persistence.schema-generation.drop-source" value="metadata"/>
-            <property name="jakarta.persistence.schema-generation.create-database-schemas" value="true"/>
+            <property name="jakarta.persistence.schema-generation.create-database-schemas" value="false"/>
             <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             <property name="jakarta.persistence.schema-generation.scripts.create-target" value="createDDL.sql"/>
             <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="dropDDL.sql"/>
-            <property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/init-db.sql"/>
+            <!--<property name="jakarta.persistence.sql-load-script-source" value="META-INF/sql/init-db.sql"/>-->
             <!-- JPA 2.x -->
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
             <property name="javax.persistence.schema-generation.create-source" value="metadata"/>
             <property name="javax.persistence.schema-generation.drop-source" value="metadata"/>
-            <property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
             <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.scripts.create-target" value="createDDL.sql"/>
             <property name="javax.persistence.schema-generation.scripts.drop-target" value="dropDDL.sql"/>

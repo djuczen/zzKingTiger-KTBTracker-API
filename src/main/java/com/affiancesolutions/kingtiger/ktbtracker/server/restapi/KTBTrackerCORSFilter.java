@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 
-//@Provider
+@Provider
 //@Priority(Integer.MAX_VALUE)
 public class KTBTrackerCORSFilter implements ContainerResponseFilter {
 
@@ -34,17 +34,19 @@ public class KTBTrackerCORSFilter implements ContainerResponseFilter {
 
     private static final String LIST_SEPARATOR = ", ";
 
-    @Inject
-    @ConfigProperty(name = HEADER_CORS_ALLOW_ORIGIN, defaultValue = "*")
-    private String[] allowedOrigins;
+    private static final String[] DEFAULT_ALLOW_ALL = new String[] { "*" };
 
     @Inject
-    @ConfigProperty(name = HEADER_CORS_ALLOW_METHODS, defaultValue = "GET,POST,PUT,DELETE,OPTIONS,HEAD")
-    private String[] allowedMethods;
+    @ConfigProperty(name = HEADER_CORS_ALLOW_ORIGIN)
+    private Optional<String[]> allowedOrigins;
 
     @Inject
-    @ConfigProperty(name = HEADER_CORS_ALLOW_HEADERS, defaultValue = "Accept,Authorization,Content-Type,Origin")
-    private String[] allowedHeaders;
+    @ConfigProperty(name = HEADER_CORS_ALLOW_METHODS)
+    private Optional<String[]> allowedMethods;
+
+    @Inject
+    @ConfigProperty(name = HEADER_CORS_ALLOW_HEADERS)
+    private Optional<String[]> allowedHeaders;
 
     @Inject
     @ConfigProperty(name = HEADER_CORS_EXPOSE_HEADERS)
@@ -77,28 +79,29 @@ public class KTBTrackerCORSFilter implements ContainerResponseFilter {
         LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{requestContext, responseContext});
 
         // Add CORS header "Access-Control-Allow-Origin" (REQUIRED)
-        responseContext.getHeaders().add(HEADER_CORS_ALLOW_ORIGIN, String.join(LIST_SEPARATOR, allowedOrigins));
+        responseContext.getHeaders()
+                .add(HEADER_CORS_ALLOW_ORIGIN, String.join(LIST_SEPARATOR, allowedOrigins.orElse(DEFAULT_ALLOW_ALL)));
 
         // Add CORS header "Access-Control-Allow-Methods" (REQUIRED)
-        responseContext.getHeaders().add(HEADER_CORS_ALLOW_METHODS, String.join(LIST_SEPARATOR, allowedMethods));
+        responseContext.getHeaders()
+                .add(HEADER_CORS_ALLOW_METHODS, String.join(LIST_SEPARATOR,allowedMethods.orElse(DEFAULT_ALLOW_ALL)));
 
         // Add CORS header "Access-Control-Allow-Credentials" (OPTIONAL)
         //  NOTE: If this header is present the only allowed value is "true"
-        if (allowCredentials.isPresent() && allowCredentials.get()) {
-            responseContext.getHeaders().add(HEADER_CORS_ALLOW_CREDS, String.valueOf(allowCredentials.get()));
-        }
+        allowCredentials.ifPresent(allowed -> responseContext.getHeaders()
+                .add(HEADER_CORS_ALLOW_CREDS, String.valueOf(true)));
 
         // Add CORS header "Access-Control-Allow-Headers" (OPTIONAL)
-        //  NOTE: These headers are in addition to the CORS-safelist request headers:
+        //  NOTE: These headers are in _addition_ to the CORS-safelisted request headers:
         //      Accept, Accept-Language, Content-Language, Content-Type
-        if (allowedHeaders.length > 0) {
-            responseContext.getHeaders().add(HEADER_CORS_ALLOW_HEADERS, String.join(LIST_SEPARATOR, allowedHeaders));
-        }
+        allowedHeaders.ifPresent(strings -> responseContext.getHeaders()
+                .add(HEADER_CORS_ALLOW_HEADERS, String.join(LIST_SEPARATOR, strings)));
 
         // Add CORS header "Access-Control-Expose-Headers" (OPTIONAL)
-        //  NOTE: These are in addition to the CORS-safelisted response headers:
+        //  NOTE: These are in _addition_ to the CORS-safelisted response headers:
         //      Cache-Control, Content-Language, Content-Length, Content-Type, Expires, Last-Modified, Pragma
-        exposedHeaders.ifPresent(strings -> responseContext.getHeaders().add(HEADER_CORS_EXPOSE_HEADERS, String.join(LIST_SEPARATOR, strings)));
+        exposedHeaders.ifPresent(strings -> responseContext.getHeaders()
+                .add(HEADER_CORS_EXPOSE_HEADERS, String.join(LIST_SEPARATOR, strings)));
 
         // Add CORS header "Access-Control-Max-Age" (OPTIONAL)
         //  NOTE: If omitted, defaults to 5 (seconds)

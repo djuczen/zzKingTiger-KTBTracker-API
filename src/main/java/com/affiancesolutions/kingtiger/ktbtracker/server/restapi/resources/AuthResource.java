@@ -6,6 +6,7 @@ import com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.model.Set
 import com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.model.VerifyPasswordRequest;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.ibm.websphere.crypto.PasswordUtil;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -60,7 +61,7 @@ public class AuthResource {
 
         VerifyPasswordRequest signInEmailRequest = new VerifyPasswordRequest();
         signInEmailRequest.setEmail(formData.getFirst(PARAM_EMAIL));
-        signInEmailRequest.setPassword(formData.getFirst(PARAM_PASSWORD));
+        signInEmailRequest.setPassword(PasswordUtil.passwordDecode(formData.getFirst(PARAM_PASSWORD)));
 
         Response response = firebaseAuthService.signInWithPassword(firebaseApiKey, signInEmailRequest);
 
@@ -97,7 +98,7 @@ public class AuthResource {
 
         VerifyPasswordRequest signInEmailRequest = new VerifyPasswordRequest();
         signInEmailRequest.setEmail(formData.getFirst(PARAM_EMAIL));
-        signInEmailRequest.setPassword(formData.getFirst(PARAM_PASSWORD));
+        signInEmailRequest.setPassword(PasswordUtil.passwordDecode(formData.getFirst(PARAM_PASSWORD)));
 
         Response response = firebaseAuthService.signUpNewUser(firebaseApiKey, signInEmailRequest);
 

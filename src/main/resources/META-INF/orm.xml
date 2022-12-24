@@ -5,7 +5,6 @@
                  xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_0.xsd">
     <persistence-unit-metadata>
         <persistence-unit-defaults>
-            <schema>public</schema>
         </persistence-unit-defaults>
     </persistence-unit-metadata>
 </entity-mappings>

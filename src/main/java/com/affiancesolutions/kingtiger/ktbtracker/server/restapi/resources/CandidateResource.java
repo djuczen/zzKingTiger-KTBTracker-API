@@ -133,6 +133,16 @@ public class CandidateResource {
         final String METHOD_NAME = "getCandidateTrackingResource";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{candidateId});
 
+        //
+        // If the candidate does not exist, return 404 Not Found
+        //
+        if (candidate == null) {
+            throw new NotFoundException(Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ErrorResult(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),
+                            String.format("Candidate %s could not be found.", candidateId
+                            )))).build());
+        }
+
         CandidateTrackingResource resource = resourceContext.initResource(candidateTrackingResource);
         resource.setCandidate(candidate);
 
@@ -144,6 +154,16 @@ public class CandidateResource {
     public CandidateStatisticsResource getCandidateStatisticsResource() {
         final String METHOD_NAME = "getCandidateStatisticsResource";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{candidateId});
+
+        //
+        // If the candidate does not exist, return 404 Not Found
+        //
+        if (candidate == null) {
+            throw new NotFoundException(Response.status(Response.Status.NOT_FOUND)
+                    .entity(new ErrorResult(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),
+                            String.format("Candidate %s could not be found.", candidateId
+                            )))).build());
+        }
 
         CandidateStatisticsResource resource = resourceContext.initResource(candidateStatisticsResource);
         resource.setCandidate(candidate);

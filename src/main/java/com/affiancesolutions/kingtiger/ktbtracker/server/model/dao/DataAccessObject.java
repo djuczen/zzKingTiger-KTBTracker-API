@@ -13,7 +13,7 @@ public class DataAccessObject<T, K> {
 
     private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
 
-    @PersistenceContext(unitName = "KTBTrackerAPI")
+    @PersistenceContext(unitName = "KingTiger-KTBTracker-API")
     protected EntityManager em;
 
 

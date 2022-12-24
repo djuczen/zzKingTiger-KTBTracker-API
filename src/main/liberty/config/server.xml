@@ -7,6 +7,7 @@
         <feature>persistence-3.0</feature>
         <feature>persistenceContainer-3.0</feature>
         <feature>enterpriseBeansLite-4.0</feature>
+        <feature>passwordUtilities-1.1</feature>
     </featureManager>
 
     <logging consoleLogLevel="INFO" traceSpecification="*=info:eclipselink.sql=all:com.affiancesolutions.kingtiger.ktbtracker.server.*=finer:UILogger=all:JAXRSRequestTracer=finest"/>
