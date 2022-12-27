@@ -1,6 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dto;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate;
 import com.affiancesolutions.kingtiger.ktbtracker.server.utils.PersonNameComponents;
 
 import java.io.Serializable;

@@ -1,7 +1,8 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.User;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.UserGroup;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.UserResult;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.User;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.UserGroup;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UserGroupsDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UsersDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.ErrorStatus;
@@ -52,6 +53,12 @@ public class UserResource {
         this.userid = userid;
     }
 */
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     /**
      * @param userid
      * @return
@@ -66,25 +73,19 @@ public class UserResource {
         final String METHOD_NAME = "getUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, userid);
 
-        // If the special "me" is requested, then resolve the current caller userid
-        if (userid.equals("me")) {
-            userid = securityContext.getUserPrincipal().getName();
-        }
-
-        User result = usersDAO.find(userid);
-        if (result == null) {
+        if (user == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),
                             String.format("User '%s' does not exist", userid))).build());
         }
+
+        UserResult result = new UserResult(user);
 
         LOGGER.exiting(CLASS_NAME, METHOD_NAME, result);
         return Response.ok(result).build();
     }
 
     /**
-     * @param userid
-     * @param user
      * @return
      * @throws IOException
      */
@@ -94,21 +95,22 @@ public class UserResource {
     @RolesAllowed(ALL_AUTHENTICATED)
     @Transactional
     public Response updateUser(
-            @PathParam(PARAM_USERID) String userid,
-            User user
+            User userRequest
     ) throws IOException {
         final String METHOD_NAME = "updateUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, userid);
-        User result = null;
+        Response response;
 
-        if (usersDAO.find(userid) != null) {
-            result = usersDAO.update(user);
+        if (user == null) {
+            User createdUser = usersDAO.create(userRequest);
+            response = Response.created(uriInfo.getAbsolutePath()).entity(createdUser).build();
         } else {
-            result = usersDAO.create(user);
+            User updatedUser = usersDAO.update(userRequest);
+            response = Response.ok(updatedUser).build();
         }
 
-        LOGGER.exiting(CLASS_NAME, METHOD_NAME, result);
-        return Response.ok(result).build();
+        LOGGER.exiting(CLASS_NAME, METHOD_NAME, response);
+        return Response.ok(response).build();
     }
 
     /**
@@ -119,14 +121,10 @@ public class UserResource {
     @DELETE
     @RolesAllowed(ALL_AUTHENTICATED)
     @Transactional
-    public Response deleteUser(
-            @PathParam("userid") String userid
-    ) throws IOException {
+    public Response deleteUser() throws IOException {
         final String METHOD_NAME = "deleteUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, userid);
 
-        // First make sure the user exists
-        User user = usersDAO.find(userid);
         if (user == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),
@@ -154,8 +152,6 @@ public class UserResource {
         final String METHOD_NAME = "getGroupsForUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, userid);
 
-        // First make sure the user exists
-        User user = usersDAO.find(userid);
         if (user == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),
@@ -184,8 +180,6 @@ public class UserResource {
         final String METHOD_NAME = "addGroupForUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{userid, groupName});
 
-        // First make sure the user exists
-        User user = usersDAO.find(userid);
         if (user == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),
@@ -225,8 +219,6 @@ public class UserResource {
         final String METHOD_NAME = "removeGroupForUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{userid, groupName});
 
-        // First make sure the user exists
-        User user = usersDAO.find(userid);
         if (user == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity(new ErrorStatus(Response.Status.NOT_FOUND.getStatusCode(),

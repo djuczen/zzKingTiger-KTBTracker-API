@@ -1,7 +1,6 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.model;
+package com.affiancesolutions.kingtiger.ktbtracker.server.model.entity;
 
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CandidatesDAO;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

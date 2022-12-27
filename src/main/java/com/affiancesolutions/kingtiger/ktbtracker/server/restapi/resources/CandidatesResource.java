@@ -1,6 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Cycle;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Cycle;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CandidatesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.CandidateResult;

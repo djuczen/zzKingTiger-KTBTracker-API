@@ -1,7 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.jpa;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Cycle;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Metadata;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Metadata;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;

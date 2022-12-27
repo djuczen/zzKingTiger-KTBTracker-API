@@ -1,6 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Cycle;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Cycle;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.CycleRequest;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.ErrorResult;
@@ -13,7 +13,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import org.checkerframework.checker.units.qual.C;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
 import javax.annotation.security.RolesAllowed;

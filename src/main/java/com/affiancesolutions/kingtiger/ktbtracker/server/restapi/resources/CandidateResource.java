@@ -1,6 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CandidatesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UsersDAO;
@@ -16,7 +16,6 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
-import org.checkerframework.checker.units.qual.C;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
 import java.net.URI;

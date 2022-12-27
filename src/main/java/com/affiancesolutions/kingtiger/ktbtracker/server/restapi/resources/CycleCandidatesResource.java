@@ -1,7 +1,7 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Cycle;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Cycle;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CandidatesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.CandidateResult;
@@ -18,8 +18,6 @@ import jakarta.ws.rs.core.SecurityContext;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;

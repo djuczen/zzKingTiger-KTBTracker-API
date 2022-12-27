@@ -1,4 +1,4 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.model;
+package com.affiancesolutions.kingtiger.ktbtracker.server.model.entity;
 
 import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;

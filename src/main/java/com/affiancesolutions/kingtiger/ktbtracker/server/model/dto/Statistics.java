@@ -1,12 +1,9 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dto;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Requirements;
-import jakarta.ws.rs.container.ResourceContext;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Requirements;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Map;
 
 public class Statistics implements Serializable {
 

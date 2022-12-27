@@ -1,7 +1,5 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dto;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Requirements;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;

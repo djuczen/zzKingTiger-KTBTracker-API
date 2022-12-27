@@ -1,9 +1,9 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dto;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Metadata;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Requirements;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Tracking;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Metadata;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Requirements;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Tracking;
 
 import java.io.Serializable;
 import java.time.LocalDate;

@@ -82,7 +82,7 @@ configurations {
 
 dependencies {
     // Liberty Gradle Plugin Runtime
-    libertyRuntime "io.openliberty:openliberty-runtime:[22.0.0.1,)"
+    libertyRuntime 'io.openliberty:openliberty-runtime:22.0.0.12'
 
     // JDBC Driver (Only ONE can be active!)
     //jdbcDriver "mysql:mysql-connector-java:8.0.30"

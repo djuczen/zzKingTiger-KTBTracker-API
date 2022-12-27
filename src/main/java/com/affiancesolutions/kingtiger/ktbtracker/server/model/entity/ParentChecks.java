@@ -1,5 +1,7 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.model;
+package com.affiancesolutions.kingtiger.ktbtracker.server.model.entity;
 
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Metadata;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

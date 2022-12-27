@@ -1,8 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dto;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Requirements;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
-import jakarta.persistence.*;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Requirements;
 
 import java.io.Serializable;
 import java.time.LocalDate;

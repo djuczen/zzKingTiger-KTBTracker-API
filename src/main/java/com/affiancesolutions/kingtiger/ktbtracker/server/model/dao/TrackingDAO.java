@@ -1,7 +1,8 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dao;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.*;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.Statistics;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Tracking;
 import jakarta.annotation.Resource;
 import jakarta.ejb.SessionContext;
 import jakarta.ejb.Stateless;

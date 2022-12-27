@@ -67,6 +67,34 @@ public class PersonNameComponents {
         LOGGER.exiting(CLASS_NAME, METHOD_NAME, this);
     }
 
+    public String getNamePrefix() {
+        return namePrefix;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public String getNameSuffix() {
+        return nameSuffix;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getPhoneticRepresentation() {
+        return phoneticRepresentation;
+    }
+
     public String familyNameSequence() {
         return String.format("%s%s%s%s",
                 this.familyName != null ? this.familyName : "",

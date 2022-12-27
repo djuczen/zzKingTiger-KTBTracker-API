@@ -1,7 +1,7 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dao;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.User;
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.UserGroup;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.User;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.UserGroup;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.exception.DAOEntityExistsException;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.exception.DAONoResultException;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.exception.DAOPersistenceException;

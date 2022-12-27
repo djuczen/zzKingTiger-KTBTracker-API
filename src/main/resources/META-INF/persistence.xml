@@ -5,16 +5,16 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
     <persistence-unit name="KingTiger-KTBTracker-API" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Cycle</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.JournalPost</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.MentorChecks</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Metadata</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.ParentChecks</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Requirements</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.Tracking</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.User</class>
-        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.UserGroup</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Candidate</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Cycle</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.JournalPost</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.MentorChecks</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Metadata</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.ParentChecks</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Requirements</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.Tracking</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.User</class>
+        <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.UserGroup</class>
         <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.jpa.LocalDateConverter</class>
         <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.jpa.LocalDateTimeConverter</class>
         <class>com.affiancesolutions.kingtiger.ktbtracker.server.model.jpa.MetadataListener</class>

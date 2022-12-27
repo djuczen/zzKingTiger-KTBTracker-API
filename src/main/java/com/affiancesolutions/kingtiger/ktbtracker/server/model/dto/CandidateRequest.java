@@ -1,7 +1,5 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.model.dto;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.Candidate;
-
 import java.io.Serializable;
 
 public class CandidateRequest implements Serializable {

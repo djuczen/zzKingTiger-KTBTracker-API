@@ -1,6 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.model.UserGroup;
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.UserGroup;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UserGroupsDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.ErrorResult;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.ErrorStatus;
