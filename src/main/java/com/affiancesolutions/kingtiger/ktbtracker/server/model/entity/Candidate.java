@@ -57,6 +57,33 @@ public class Candidate implements Serializable {
     private Cycle cycle;
 
     /**
+     * Indicate if the candidate is auditing the cycle (no final testing).
+     */
+    @Column(name = "AUDIT", nullable = false)
+    private boolean audit;
+
+    /**
+     * Indicate if the candidate is continuing a previously incomplete or audited cycle. If non-zero, then
+     * up to 1/3 of certain requirements will be carried over from the indicated previous cycle.
+     */
+    @Column(name = "CYCLE_CONT", nullable = false)
+    private int cycleCont;
+
+    /**
+     * Indicate if the candidate is a "Poom" candidate (under age 13). By default, candidates are treated as adults.
+     * Some requirement targets may be reduced for Poom candidate.
+     */
+    @Column(name = "POOM", nullable = false)
+    private boolean poom;
+
+    /**
+     * Belt rank (current rank), where 0 is BoCho Dan, 1 is Il (First) Dan, etc. Masters are 4 (Fourth Dan) or higher,
+     * and Grandmaster is 6 (Sixth Dan) or higher).
+     */
+    @Column(name = "BELT_RANK", nullable = false)
+    private int beltRank;
+
+    /**
      * Completed required essays (varies depending on belt rank)
      */
     @Column(name = "ESSAYS", nullable = false)
@@ -116,6 +143,37 @@ public class Candidate implements Serializable {
         this.cycle = cycle;
     }
 
+    public boolean isAudit() {
+        return audit;
+    }
+
+    public void setAudit(boolean audit) {
+        this.audit = audit;
+    }
+
+    public int getCycleCont() {
+        return cycleCont;
+    }
+
+    public void setCycleCont(int cycleCont) {
+        this.cycleCont = cycleCont;
+    }
+
+    public boolean isPoom() {
+        return poom;
+    }
+
+    public void setPoom(boolean poom) {
+        this.poom = poom;
+    }
+
+    public int getBeltRank() {
+        return beltRank;
+    }
+
+    public void setBeltRank(int beltRank) {
+        this.beltRank = beltRank;
+    }
 
     public int getEssays() {
         return essays;
