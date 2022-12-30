@@ -57,6 +57,36 @@ public class Candidate implements Serializable {
     private Cycle cycle;
 
     /**
+     * Completed required essays (varies depending on belt rank)
+     */
+    @Column(name = "ESSAYS", nullable = false)
+    private int essays;
+
+    /**
+     * Completed required recommendation letters (varies depending on belt rank).
+     */
+    @Column(name = "LETTERS", nullable = false)
+    private int letters;
+
+    /**
+     * Score obtained on the written pre-exam.
+     */
+    @Column(name = "PRE_EXAM_WRITTEN", nullable = false)
+    private double preExamWritten;
+
+    /**
+     * Score obtained on the written exam.
+     */
+    @Column(name = "EXAM_WRITTEN", nullable = false)
+    private double examWritten;
+
+    /**
+     * Physical exam results (pre- and official physical exam results).
+     */
+    @Embedded
+    private PhysicalExam physicalExam = new PhysicalExam();
+
+    /**
      * Metadata (created, last modified) for the mentor checklist record (Embedded)
      */
     @Embedded
@@ -86,6 +116,46 @@ public class Candidate implements Serializable {
         this.cycle = cycle;
     }
 
+
+    public int getEssays() {
+        return essays;
+    }
+
+    public void setEssays(int essays) {
+        this.essays = essays;
+    }
+
+    public int getLetters() {
+        return letters;
+    }
+
+    public void setLetters(int letters) {
+        this.letters = letters;
+    }
+
+    public double getPreExamWritten() {
+        return preExamWritten;
+    }
+
+    public void setPreExamWritten(double preExamWritten) {
+        this.preExamWritten = preExamWritten;
+    }
+
+    public double getExamWritten() {
+        return examWritten;
+    }
+
+    public void setExamWritten(double examWritten) {
+        this.examWritten = examWritten;
+    }
+
+    public PhysicalExam getPhysicalExam() {
+        return physicalExam;
+    }
+
+    public void setPhysicalExam(PhysicalExam physicalExam) {
+        this.physicalExam = physicalExam;
+    }
     public Metadata getMetadata() {
         return metadata;
     }

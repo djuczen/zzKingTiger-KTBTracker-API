@@ -2,6 +2,7 @@ package com.affiancesolutions.kingtiger.ktbtracker.server.model.entity;
 
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.CyclesDAO;
 import jakarta.persistence.*;
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -76,10 +77,10 @@ public class Cycle implements Serializable {
     private LocalDate cyclePostEnd;
 
     /**
-     * The day of the week when a cycle week begins, 0 = Sunday, 6 = Saturday.
+     * The day of the week (ISO) when a cycle week begins, 1 = Monday, 6 = Saturday.
      */
     @Column(name = "CYCLE_WEEK_START", nullable = false)
-    private Integer cycleWeekStart;
+    private int cycleWeekStart;
 
     /**
      * Requirements (physical, classes, other) for the cycle. These particular values indicate the "goal" to be
@@ -150,11 +151,11 @@ public class Cycle implements Serializable {
         this.cyclePostEnd = cyclePostEnd;
     }
 
-    public Integer getCycleWeekStart() {
+    public int getCycleWeekStart() {
         return cycleWeekStart;
     }
 
-    public void setCycleWeekStart(Integer cycleWeekStart) {
+    public void setCycleWeekStart(int cycleWeekStart) {
         this.cycleWeekStart = cycleWeekStart;
     }
 
