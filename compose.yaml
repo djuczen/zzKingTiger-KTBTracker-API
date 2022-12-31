@@ -38,13 +38,13 @@ services:
       - "40145:9443"
     environment:
       - DATABASE_HOST=ktbtracker-db
-      - DATABASE_PORT=${POSTGRES_PORT}
+      - DATABASE_PORT=5432
       - DATABASE_NAME=${POSTGRES_DB}
       - DATABASE_USER=${POSTGRES_USER}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
       - GOOGLE_APPLICATION_CREDENTIALS=/config/ktbtracker-1659484356633-444cd448ac34.json
     volumes:
-      - ${TEMP}/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json:ro
+      - ~/Downloads/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json:ro
       - /etc/pki/tls/private/kingtigerblackbelt.com.key:/etc/x509/certs/tls.key:ro
       - /etc/pki/tls/certs/kingtigerblackbelt.com.bundle:/etc/x509/certs/tls.crt:ro
     depends_on:

@@ -7,19 +7,17 @@ import com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.model.Ver
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.ibm.websphere.crypto.PasswordUtil;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.MultivaluedMap;
-import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.*;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -31,11 +29,15 @@ import static com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.Co
 @SimplyTimed
 @RequestScoped
 @Path("/auth")
+@jakarta.annotation.security.PermitAll
 public class AuthResource {
 
     private static final String CLASS_NAME = AuthResource.class.getName();
 
     private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
+
+    @Context
+    private SecurityContext securityContext;
 
     @Inject
     @RestClient
@@ -45,8 +47,6 @@ public class AuthResource {
     @ConfigProperty(name = "firebase.auth.apiKey")
     private String firebaseApiKey;
 
-    @Inject
-    private JsonWebToken jsonWebToken;
 
     @POST
     @Path("signInWithPassword")
@@ -112,6 +112,7 @@ public class AuthResource {
     public Response updateToken() throws FirebaseAuthException {
         final String METHOD_NAME = "updateToken";
         LOGGER.entering(CLASS_NAME, METHOD_NAME);
+        JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
         Map<String, Object> claims = new HashMap<>();
 
         claims.put("upn", jsonWebToken.getClaim(PARAM_EMAIL));
@@ -130,6 +131,7 @@ public class AuthResource {
     public Response getAccountInfo() throws FirebaseAuthException {
         final String METHOD_NAME = "getAccountInfo";
         LOGGER.entering(CLASS_NAME, METHOD_NAME);
+        JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
 
         GetAccountInfoRequest getAccountInfoRequest = new GetAccountInfoRequest();
         getAccountInfoRequest.setIdToken(jsonWebToken.getRawToken());
@@ -150,6 +152,7 @@ public class AuthResource {
     ) throws FirebaseAuthException {
         final String METHOD_NAME = "setAccountInfo";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, request);
+        JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
 
         SetAccountInfoRequest setAccountInfoRequest = new SetAccountInfoRequest();
         setAccountInfoRequest.setIdToken(jsonWebToken.getRawToken());

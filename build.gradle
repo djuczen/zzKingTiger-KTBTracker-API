@@ -58,7 +58,7 @@ dependencies {
     // Third-Party APIs (WEB-INF/lib)
     //implementation 'com.google.firebase:firebase-core'
     implementation 'com.google.firebase:firebase-admin:[9.0.0,)'
-    //implementation group: 'org.bitbucket.b_c', name: 'jose4j', version: '0.8.0'
+    implementation 'org.bitbucket.b_c:jose4j:[0.8.0,)'
     implementation "org.slf4j:slf4j-jdk14:[1.7.36,)"
 
     // Provided APIs
@@ -117,7 +117,7 @@ libertyCreate.finalizedBy copyGlobalLibraries
 
 liberty {
     dev {
-        dockerRunOpts = "-v /tmp/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json --env-file=/tmp/ktbtracker-db.env"
+        dockerRunOpts = "-v "+System.getProperty('java.io.tmpdir')+"ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json -e DATABASE_HOST -e DATABASE_PORT -e DATABASE_NAME -e DATABASE_USER -e DATABASE_PASSWORD -e GOOGLE_APPLICATION_CREDENTIALS=/config/ktbtracker-1659484356633-444cd448ac34.json"
     }
     server {
         mergeServerEnv = true
@@ -127,7 +127,6 @@ liberty {
                 'SEC_SSO_REDIRECTTORPHOSTANDPORT'   : "http://localhost:${http_port}",
                 'JDBC_DRIVER_PATH'                  : layout.buildDirectory.dir("libs/jdbc").get().asFile,
         ]
-        serverEnvFile = file("/tmp/ktbtracker-db.env")
     }
 }
 

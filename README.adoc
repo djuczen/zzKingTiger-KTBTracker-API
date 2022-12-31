@@ -5,14 +5,38 @@
 Certain environment variables are required in order to run the develop environment and to build the Docker Compose
 image.
 
+=== Database Server
+
+==== PostgreSQL Server
+
+There are several secret values that *MUST NOT* be stored in version control. Define the following environment variables
+in your shell profile (i.e. `~/.bash_profile`, `~/.zprofile`,
+`~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1`, etc.):
+
+* `POSTGRES_DB`
+* `POSTGRES_USER`
+* `POSTGRES_PASSWORD`
+
+==== pgAdmin Server
+
+There are several secret values that *MUST NOT* be stored in version control. Define the following environment variables
+in your shell profile (i.e. `~/.bash_profile`, `~/.zprofile`,
+`~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1`, etc.):
+
+* `PGADMIN_DEFAULT_EMAIL` - this is the administrator email address used to login to the pgAdmin console
+* `PGADMIN_DEFAULT_PASSWORD` - this is the administrator credentials used to login to the pgAdmin console
+
 === Liberty Development Server
 
-There are several secret values that MUST NOT be stored in version control. Define the following environment variables in your
-profile (i.e. `~/.bash_profile`, `~/.zprofile`, `~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1`, etc.):
+There are several secret values that *MUST NOT* be stored in version control. Define the following environment variables
+in your shell profile (i.e. `~/.bash_profile`, `~/.zprofile`,
+`~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1`, etc.):
 
 * `DATABASE_HOST` - the hostname of the database connection, typically this will be `localhost`
-* `DATABASE_PORT` - the port number of the database connection, typically `3306` or `5432`
-* `DATABASE_NAME` - the database name (not the schema)
+* `DATABASE_PORT` - the port number of the database connection, typically `5432` (PostgreSQL)
+* `DATABASE_NAME` - the database name (not the schema) for the database connection
 * `DATABASE_USER` - the user account for the database connection
 * `DATABASE_PASSWORD` - the user credentials for the database connection
 * `GOOGLE_APPLICATION_CREDENTIALS` - the location of the Google Firebase service account key file
+
+=== Docker Compose

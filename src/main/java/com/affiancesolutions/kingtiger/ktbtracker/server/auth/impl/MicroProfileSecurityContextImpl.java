@@ -16,9 +16,11 @@ public class MicroProfileSecurityContextImpl implements SecurityContext {
 
     private final SecurityContext securityContext;
 
+    private final JsonWebToken jsonWebToken;
 
-    public MicroProfileSecurityContextImpl(SecurityContext securityContext) {
+    public MicroProfileSecurityContextImpl(SecurityContext securityContext, JsonWebToken jsonWebToken) {
         this.securityContext = securityContext;
+        this.jsonWebToken = jsonWebToken;
     }
 
     /**
@@ -31,7 +33,7 @@ public class MicroProfileSecurityContextImpl implements SecurityContext {
      */
     @Override
     public Principal getUserPrincipal() {
-        return securityContext.getUserPrincipal();
+        return jsonWebToken != null ? jsonWebToken : securityContext.getUserPrincipal();
     }
 
     /**
@@ -46,6 +48,10 @@ public class MicroProfileSecurityContextImpl implements SecurityContext {
     @Override
     public boolean isUserInRole(String role) {
         boolean userInRole = getUserPrincipal() != null && ALL_AUTHENTICATED.equals(role);
+
+        if (!userInRole && jsonWebToken != null) {
+            userInRole = jsonWebToken.getGroups().contains(role);
+        }
 
         if (!userInRole && getUserPrincipal() != null) {
             userInRole = securityContext.isUserInRole(role);

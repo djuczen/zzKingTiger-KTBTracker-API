@@ -1,20 +1,16 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.auth.impl;
 
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.auth.OIDCUtils;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
-import org.jose4j.jwk.HttpsJwks;
 import org.jose4j.jwt.JwtClaims;
 import org.jose4j.jwt.MalformedClaimException;
 import org.jose4j.jwt.consumer.InvalidJwtException;
 import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
-import org.jose4j.keys.resolvers.HttpsJwksVerificationKeyResolver;
 
 import javax.security.auth.Subject;
 import java.io.IOException;
@@ -29,7 +25,7 @@ import static com.affiancesolutions.kingtiger.ktbtracker.server.Constants.JWT_IS
 
 public class MicroProfileJsonWebTokenImpl implements JsonWebToken {
 
-    private static final String CLASS_NAME = MicroProfileJsonWebTokenImpl.class.getName();
+    private static final String CLASS_NAME = MicroProfileJsonWebTokenImpl.class.getSimpleName();
 
     private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
 
