@@ -101,14 +101,14 @@ public class UsersResource {
         LOGGER.entering(CLASS_NAME, METHOD_NAME, user);
 
         // If the user already exists, return 409 Conflict...
-        if (usersDAO.find(user.getId()) != null) {
+        if (usersDAO.find(user.getUserId()) != null) {
             throw new WebApplicationException(Response.status(Response.Status.CONFLICT)
                     .entity(new ErrorStatus(Response.Status.CONFLICT.getStatusCode(),
-                            String.format("User '%s' is already registered", user.getId()))).build());
+                            String.format("User '%s' is already registered", user.getUserId()))).build());
         }
 
         User result = usersDAO.create(user);
-        URI location = uriInfo.getAbsolutePathBuilder().path(user.getId()).build();
+        URI location = uriInfo.getAbsolutePathBuilder().path(user.getUserId()).build();
 
         LOGGER.exiting(CLASS_NAME, METHOD_NAME, result);
         return Response.created(location).entity(result).build();

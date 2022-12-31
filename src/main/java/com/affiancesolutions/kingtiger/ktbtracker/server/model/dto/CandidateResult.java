@@ -122,6 +122,14 @@ public class CandidateResult implements Serializable {
         this.userId = userId;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
     public int getCycleId() {
         return cycleId;
     }

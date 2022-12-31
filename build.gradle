@@ -128,6 +128,7 @@ liberty {
                 'SEC_SSO_OIDC_DISCOVERYENDPOINT'    : "http://localhost:40480/realms/ktbtracker/.well-known/openid-configuration",
                 'JDBC_DRIVER_PATH'                  : layout.buildDirectory.dir("libs/jdbc").get().asFile,
         ]
+        serverEnvFile = new File("ktbtracker-db.env")
     }
 }
 

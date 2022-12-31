@@ -20,11 +20,11 @@ import java.io.Serializable;
                         + "ORDER BY t.id DESC"),
         @NamedQuery(name = "Candidate.findForUser",
                 query = "SELECT t FROM Candidate AS t "
-                        + "WHERE t.user.id = :user "
+                        + "WHERE t.user.userId = :user "
                         + "ORDER BY t.id DESC"),
         @NamedQuery(name = "Candidate.findForUserByCycle",
                 query = "SELECT t FROM Candidate AS t "
-                        + "WHERE t.user.id = :user "
+                        + "WHERE t.user.userId = :user "
                         + "AND t.cycle = :cycle ")
 })
 public class Candidate implements Serializable {
@@ -224,6 +224,6 @@ public class Candidate implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Candidate(id=%d, user_id=%s, cycle=%s)", id, user.getId(), cycle.getId());
+        return String.format("Candidate(id=%d, user_id=%s, cycle=%s)", id, user.getUserId(), cycle.getId());
     }
 }
