@@ -60,7 +60,7 @@ public class CandidatesResource {
     ) {
         final String METHOD_NAME = "listCandidates";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, cycleId);
-        Comparator<CandidateResult> NameComparator = Comparator.comparing(CandidateResult::getFamilyNameOrder);
+        Comparator<CandidateResult> NameComparator = Comparator.comparing(CandidateResult::getFullName);
         Cycle cycle;
 
         //

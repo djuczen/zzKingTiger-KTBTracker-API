@@ -155,7 +155,7 @@ public class CandidateTrackingResource {
         }
 
 
-        candidateTrackingResult.setUserId(candidate.getUser().getId());
+        candidateTrackingResult.setUserId(candidate.getUser().getUserId());
         candidateTrackingResult.setCandidateId(candidate.getId());
         candidateTrackingResult.setCycleId(candidate.getCycle().getId());
         candidateTrackingResult.setStartDate(startDate);
