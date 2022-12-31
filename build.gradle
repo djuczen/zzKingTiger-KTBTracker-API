@@ -117,8 +117,7 @@ libertyCreate.finalizedBy copyGlobalLibraries
 
 liberty {
     dev {
-        container = true
-        dockerRunOpts = "-v /tmp/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json --env-file=/tmp/ktbtracker-db.env"
+        dockerRunOpts = "-v /tmp/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json --env-file=/tmp/ktbtracker-db.env -e DATABASE_HOST=localhost -e DATABASE_PORT=40132"
     }
     server {
         mergeServerEnv = true

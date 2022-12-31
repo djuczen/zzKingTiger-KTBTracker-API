@@ -13,7 +13,7 @@
     <logging consoleLogLevel="INFO" traceSpecification="*=info:eclipselink.sql=all:com.affiancesolutions.kingtiger.ktbtracker.server.*=finer:UILogger=all:JAXRSRequestTracer=finest"/>
 
     <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
-    <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443" host="localhost">
+    <httpEndpoint id="defaultHttpEndpoint" httpPort="9080" httpsPort="9443" host="*">
         <headers>
             <setIfMissing>Strict-Transport-Security:max-age=63072000; includeSubDomains</setIfMissing>
             <setIfMissing>Content-Security-Policy:default-src http: https: data: 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self'</setIfMissing>
