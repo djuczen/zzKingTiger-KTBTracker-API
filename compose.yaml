@@ -6,7 +6,7 @@ services:
     restart: always
     ports:
       - "40132:5432"
-    env_file: ktbtracker-db.env
+    env_file: /tmp/ktbtracker-db.env
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     networks:
@@ -18,7 +18,7 @@ services:
     restart: always
     ports:
       - "40180:80"
-    env_file: ktbtracker-db.env
+    env_file: /tmp/ktbtracker-db.env
     networks:
       - ktbtracker-net
 
@@ -31,8 +31,9 @@ services:
     ports:
       - "40182:9080"
       - "40145:9443"
-    env_file: ktbtracker-db.env
+    env_file: /tmp/ktbtracker-db.env
     volumes:
+      - /tmp/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json:ro
       - /etc/pki/tls/private/kingtigerblackbelt.com.key:/etc/x509/certs/tls.key:ro
       - /etc/pki/tls/certs/kingtigerblackbelt.com.bundle:/etc/x509/certs/tls.crt:ro
     depends_on:

@@ -116,19 +116,18 @@ task copyGlobalLibraries(type: Copy) {
 libertyCreate.finalizedBy copyGlobalLibraries
 
 liberty {
+    dev {
+        container = true
+        dockerRunOpts = "-v /tmp/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json --env-file=/tmp/ktbtracker-db.env"
+    }
     server {
         mergeServerEnv = true
         env = [
                 'HTTP_PORT'                         : "${http_port}",
                 'HTTPS_PORT'                        : "${https_port}",
                 'SEC_SSO_REDIRECTTORPHOSTANDPORT'   : "http://localhost:${http_port}",
-
-                'SEC_SSO_OIDC_CLIENTID'             : "kingtiger-ktbtracker",
-                'SEC_SSO_OIDC_CLIENTSECRET'         : "72898b92-8257-4637-9102-01027a5ce9fd",
-                'SEC_SSO_OIDC_DISCOVERYENDPOINT'    : "http://localhost:40480/realms/ktbtracker/.well-known/openid-configuration",
                 'JDBC_DRIVER_PATH'                  : layout.buildDirectory.dir("libs/jdbc").get().asFile,
         ]
-        serverEnvFile = new File("ktbtracker-db.env")
     }
 }
 
