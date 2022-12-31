@@ -6,7 +6,10 @@ services:
     restart: always
     ports:
       - "40132:5432"
-    env_file: /tmp/ktbtracker-db.env
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     networks:
@@ -18,7 +21,9 @@ services:
     restart: always
     ports:
       - "40180:80"
-    env_file: /tmp/ktbtracker-db.env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     networks:
       - ktbtracker-net
 
@@ -31,9 +36,15 @@ services:
     ports:
       - "40182:9080"
       - "40145:9443"
-    env_file: /tmp/ktbtracker-db.env
+    environment:
+      - DATABASE_HOST=ktbtracker-db
+      - DATABASE_PORT=${POSTGRES_PORT}
+      - DATABASE_NAME=${POSTGRES_DB}
+      - DATABASE_USER=${POSTGRES_USER}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - GOOGLE_APPLICATION_CREDENTIALS=/config/ktbtracker-1659484356633-444cd448ac34.json
     volumes:
-      - /tmp/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json:ro
+      - ${TEMP}/ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json:ro
       - /etc/pki/tls/private/kingtigerblackbelt.com.key:/etc/x509/certs/tls.key:ro
       - /etc/pki/tls/certs/kingtigerblackbelt.com.bundle:/etc/x509/certs/tls.crt:ro
     depends_on:
