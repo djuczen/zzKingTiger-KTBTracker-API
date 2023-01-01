@@ -1,6 +1,6 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.test;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.restapi.KTBTrackerApplication;
+import com.affiancesolutions.kingtiger.ktbtracker.server.KTBTrackerApplication;
 import com.affiancesolutions.kingtiger.commons.logging.JAXRSClientRequestTracer;
 import jakarta.json.JsonObject;
 import jakarta.ws.rs.ApplicationPath;

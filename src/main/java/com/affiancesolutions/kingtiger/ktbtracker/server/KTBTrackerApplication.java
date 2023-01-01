@@ -1,4 +1,4 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.restapi;
+package com.affiancesolutions.kingtiger.ktbtracker.server;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.ApplicationPath;

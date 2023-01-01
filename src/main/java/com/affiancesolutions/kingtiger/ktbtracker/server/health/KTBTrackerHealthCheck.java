@@ -1,6 +1,5 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.health;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.restapi.KTBTrackerApplication;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;

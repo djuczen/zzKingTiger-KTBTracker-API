@@ -62,10 +62,6 @@ public class CycleCandidatesResource {
     @Context
     private SecurityContext securityContext;
 
-    @Inject
-    private JsonWebToken jsonWebToken;
-
-
     private Cycle cycle;
 
     public void setCycle(Cycle cycle) {
@@ -108,7 +104,8 @@ public class CycleCandidatesResource {
             @PathParam(PARAM_CAN_ID) String candidateId
     ) {
         final String METHOD_NAME = "getCandidateResource";
-        LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{cycleId, candidateId, jsonWebToken});
+        LOGGER.entering(CLASS_NAME, METHOD_NAME, new Object[]{cycleId, candidateId});
+        JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
         Candidate candidate = null;
 
         if (candidateId.equalsIgnoreCase(PARAM_ME)) {

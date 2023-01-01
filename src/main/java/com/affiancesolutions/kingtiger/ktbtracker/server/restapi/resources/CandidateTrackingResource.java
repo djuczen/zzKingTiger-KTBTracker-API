@@ -62,9 +62,6 @@ public class CandidateTrackingResource {
     @Inject
     private JournalPostsDAO journalPostsDAO;
 
-    @Inject
-    private JsonWebToken jsonWebToken;
-
     private Candidate candidate;
 
 

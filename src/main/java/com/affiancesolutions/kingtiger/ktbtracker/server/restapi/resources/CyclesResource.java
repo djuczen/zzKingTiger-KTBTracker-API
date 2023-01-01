@@ -10,10 +10,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.container.ResourceContext;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
@@ -39,6 +36,9 @@ public class CyclesResource {
     private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
 
     @Context
+    private SecurityContext securityContext;
+
+    @Context
     private UriInfo uriInfo;
 
     @Inject
@@ -53,8 +53,6 @@ public class CyclesResource {
     @Context
     ResourceContext resourceContext;
 
-    @Inject
-    private JsonWebToken jsonWebToken;
 
     /**
      * @return
@@ -65,6 +63,7 @@ public class CyclesResource {
     public Response listCycles() throws IOException {
         final String METHOD_NAME = "listCycles";
         LOGGER.entering(CLASS_NAME, METHOD_NAME);
+        JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
 
         LOGGER.finest(String.format("Roles: %s, displayName: %s", jsonWebToken.getGroups(), jsonWebToken.getClaim("name")));
         List<Cycle> resultList = cyclesDAO.findAll();

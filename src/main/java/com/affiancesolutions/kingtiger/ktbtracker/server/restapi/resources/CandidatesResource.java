@@ -44,9 +44,6 @@ public class CandidatesResource {
     @Inject
     private CandidatesDAO candidatesDAO;
 
-    @Inject
-    private JsonWebToken jsonWebToken;
-
 
     /**
      *

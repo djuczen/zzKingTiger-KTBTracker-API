@@ -50,9 +50,6 @@ public class UsersResource {
     private ResourceContext resourceContext;
 
     @Inject
-    private JsonWebToken jsonWebToken;
-
-    @Inject
     private UsersDAO usersDAO;
 
     @Inject
@@ -120,6 +117,7 @@ public class UsersResource {
     ) {
         final String METHOD_NAME = "getUserResource";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, userid);
+        JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
         User user;
 
         if (userid.equals(PARAM_ME)) {
