@@ -1,9 +1,9 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
+package com.affiancesolutions.kingtiger.ktbtracker.server.test.restapi.resources;
 
 import com.affiancesolutions.kingtiger.ktbtracker.client.model.UserGroup;
 import com.affiancesolutions.kingtiger.ktbtracker.client.services.UserGroupsService;
-import com.affiancesolutions.kingtiger.ktbtracker.server.test.TestClient;
-import com.affiancesolutions.kingtiger.ktbtracker.server.test.TestConfiguration;
+import com.affiancesolutions.kingtiger.ktbtracker.server.test.junit.TestClient;
+import com.affiancesolutions.kingtiger.ktbtracker.server.test.junit.TestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 

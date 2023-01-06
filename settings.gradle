@@ -8,5 +8,6 @@
  */
 
 rootProject.name = 'KingTiger-KTBTracker-API'
+include 'microprofile-jwt'
 include 'ktbtracker-api'
 include 'commons'

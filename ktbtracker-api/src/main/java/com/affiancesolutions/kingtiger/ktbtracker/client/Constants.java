@@ -2,7 +2,7 @@ package com.affiancesolutions.kingtiger.ktbtracker.client;
 
 public interface Constants {
 
-    String KINGTIGER_KTBTRACKER_SERVICE = "kingtiger.ktbtracker.service";
+    String KINGTIGER_KTBTRACKER_SERVICE = "kingtiger.ktbtracker.svc.service";
 
     String PARAM_CAN_ID = "can_id";
     String PARAM_CYCLE_ID = "cycle_id";

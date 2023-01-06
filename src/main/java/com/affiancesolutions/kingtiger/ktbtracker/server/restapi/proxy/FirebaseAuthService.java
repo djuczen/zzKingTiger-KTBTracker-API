@@ -53,6 +53,6 @@ public interface FirebaseAuthService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response signUpNewUser(
             @QueryParam(PARAM_API_KEY) String apiKey,
-            VerifyPasswordRequest signInWithPasswordlRequest
+            VerifyPasswordRequest signInWithPasswordRequest
     );
 }

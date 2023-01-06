@@ -27,8 +27,12 @@ public class KTBTrackerContextListener implements ServletContextListener {
                     .setCredentials(GoogleCredentials.getApplicationDefault())
                     .build();
             FirebaseApp.initializeApp(firebaseOptions);
+            LOGGER.info(String.format("KTBT0010I: Google Firebase application services has been successfully initialized."));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.severe(String.format("KTBT0011E: Unable to load Google Firebase credentials. %s", e.getLocalizedMessage()));
+            LOGGER.throwing(CLASS_NAME, METHOD_NAME, e);
+        } catch (IllegalStateException e) { //NOSONAR
+            LOGGER.warning(String.format("KTBT0012W: Google Firebase application services already initialized. %s", e.getLocalizedMessage()));
         }
 
         LOGGER.exiting(CLASS_NAME, METHOD_NAME);

@@ -38,6 +38,12 @@ public class User implements Serializable {
     private String displayName;
 
     /**
+     * The email address of the user used to sign up.
+     */
+    @Column(name = "EMAIL", nullable = false)
+    private String email;
+
+    /**
      * Object Relationship Mapping (ORM) many-to-many relationship to the user groups (UserGroup) the user is a member.
      */
     @JsonbTransient
@@ -58,6 +64,14 @@ public class User implements Serializable {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<UserGroup> getGroups() {

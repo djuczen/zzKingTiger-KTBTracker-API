@@ -23,6 +23,12 @@ public class PhysicalExam implements Serializable {
     @Column(name = "PRE_EXAM_BURPEES", nullable = false)
     private int preExamBurpees;
 
+    @Column(name = "PRE_EXAM_PULLUPS", nullable = false)
+    private int preExamPullUps;
+
+    @Column(name = "PRE_EXAM_PLANKS", nullable = false)
+    private int preExamPlanks;
+
     @Column(name = "EXAM_RUN", nullable = false)
 
     private double examRun;
@@ -35,5 +41,11 @@ public class PhysicalExam implements Serializable {
 
     @Column(name = "EXAM_BURPEES", nullable = false)
     private int examBurpees;
+
+    @Column(name = "EXAM_PULLUPS", nullable = false)
+    private int examPullUps;
+
+    @Column(name = "EXAM_PLANKS", nullable = false)
+    private int examPlanks;
 
 }

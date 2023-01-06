@@ -27,14 +27,14 @@ public interface UserGroupsService {
     );
 
     @GET
-    @Path("/{groupName}")
+    @Path("/{group}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserGroup getUserGroup(
             @PathParam(PARAM_GROUP_NAME) String groupName
     ) throws IOException;
 
     @PUT
-    @Path("/{groupName}")
+    @Path("/{group}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserGroup updateUserGroup(
             @PathParam(PARAM_GROUP_NAME) String groupName,
@@ -42,7 +42,7 @@ public interface UserGroupsService {
     );
 
     @DELETE
-    @Path("/{groupName}")
+    @Path("/{group}")
     public void deleteUserGroup(
             @PathParam(PARAM_GROUP_NAME) String groupName
     ) throws IOException;

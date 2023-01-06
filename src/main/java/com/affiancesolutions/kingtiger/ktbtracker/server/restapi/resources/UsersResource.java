@@ -7,6 +7,7 @@ import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.UserGroup;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UserGroupsDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UsersDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.ErrorStatus;
+import com.google.firebase.auth.ListUsersPage;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
@@ -72,6 +73,7 @@ public class UsersResource {
     public Response listUsers() throws IOException {
         final String METHOD_NAME = "listUsers";
         LOGGER.entering(CLASS_NAME, METHOD_NAME);
+        ListUsersPage page;
 
         List<UserResult> resultList = usersDAO.findAll().stream().map(UserResult::new)
                 .sorted(FullNameComparator)

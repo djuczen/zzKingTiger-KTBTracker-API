@@ -25,6 +25,16 @@ ext {
     microshedVersion = "[0.9.1,)"
     resteasyVersion = "[6.1.0.Final,)"
     resteasyMicroProfileVersion = "[1.0.0.Final,)"
+
+    googleCredentials = "ktbtracker-1659484356633-444cd448ac34.json"
+}
+
+def onlyFor(task, config) {
+    gradle.taskGraph.whenReady { graph ->
+        if (graph.hasTask(task)) {
+            project.configure(project, config)
+        }
+    }
 }
 
 // Pull in common repositories...
@@ -53,6 +63,7 @@ dependencies {
 
     // Intra-Project Dependencies (WEB-INF/lib)
     implementation project(':commons')
+    implementation project(':microprofile-jwt')
     implementation project(':ktbtracker-api')
 
     // Third-Party APIs (WEB-INF/lib)
@@ -117,7 +128,16 @@ libertyCreate.finalizedBy copyGlobalLibraries
 
 liberty {
     dev {
-        dockerRunOpts = "-v "+System.getProperty('java.io.tmpdir')+"ktbtracker-1659484356633-444cd448ac34.json:/config/ktbtracker-1659484356633-444cd448ac34.json -e DATABASE_HOST -e DATABASE_PORT -e DATABASE_NAME -e DATABASE_USER -e DATABASE_PASSWORD -e GOOGLE_APPLICATION_CREDENTIALS=/config/ktbtracker-1659484356633-444cd448ac34.json"
+        dockerRunOpts = [
+                "--network ktbtracker-network",
+                "-v "+System.getProperty('java.io.tmpdir')+"${googleCredentials}:/config/${googleCredentials}",
+                "-e DATABASE_HOST=localhost",
+                "-e DATABASE_PORT=5432",
+                "-e DATABASE_NAME",
+                "-e DATABASE_USER",
+                "-e DATABASE_PASSWORD",
+                "-e GOOGLE_APPLICATION_CREDENTIALS=/config/${googleCredentials}",
+                ].join(" ")
     }
     server {
         mergeServerEnv = true

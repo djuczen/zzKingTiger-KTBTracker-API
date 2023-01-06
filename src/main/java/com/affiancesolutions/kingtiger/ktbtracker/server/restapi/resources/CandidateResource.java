@@ -16,12 +16,15 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
+import javax.annotation.security.RolesAllowed;
 import java.net.URI;
 import java.util.logging.Logger;
 
 import static com.affiancesolutions.kingtiger.ktbtracker.server.Constants.PARAM_CAN_ID;
+import static com.affiancesolutions.kingtiger.ktbtracker.server.Constants.ROLE_ADMIN;
 
 /**
  * The sub-resource class for managing individual candidates.
@@ -59,6 +62,9 @@ public class CandidateResource {
     @Inject
     private CandidateStatisticsResource candidateStatisticsResource;
 
+    @Inject
+    private JsonWebToken jsonWebToken;
+
     private Candidate candidate;
 
 
@@ -92,6 +98,7 @@ public class CandidateResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({ROLE_ADMIN})
     public Response updateCandidate(
             CandidateRequest candidateRequest
     ) {

@@ -1,4 +1,4 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.test;
+package com.affiancesolutions.kingtiger.ktbtracker.server.test.junit;
 
 import java.lang.annotation.*;
 

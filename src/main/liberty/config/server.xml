@@ -37,12 +37,15 @@
     <!-- Default SSL configuration enables trust for default certificates from the Java runtime -->
     <ssl id="defaultSSLConfig" trustDefaultCerts="true"/>
 
+    <variable name="mp.jwt.verify.publickey.location" value="https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"/>
+    <variable name="mp.jwt.verify.issuer" value="https://securetoken.google.com/ktbtracker-1659484356633"/>
+    <variable name="mp.jwt.verify.audiences" value="ktbtracker-1659484356633"/>
     <mpJwt
             id="myMpJwt"
-            jwksUri="https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com"
-            issuer="https://securetoken.google.com/ktbtracker-1659484356633"
-            userNameAttribute="user_id"
-            audiences="ktbtracker-1659484356633">
+            jwksUri="${mp.jwt.verify.publickey.location}"
+            issuer="${mp.jwt.verify.issuer}"
+            audiences="${mp.jwt.verify.audiences}"
+            userNameAttribute="user_id">
     </mpJwt>
 
     <library id="JDBC_DRIVER">
@@ -51,9 +54,7 @@
     <dataSource id="DefaultDataSource">
         <jdbcDriver libraryRef="JDBC_DRIVER"/>
         <properties serverName="${database.host}" portNumber="${database.port}"
-                    databaseName="${database.name}" user="${database.user}" password="${database.password}"
-                    useSSL="false" allowMultiQueries="true" serverTimezone="UTC" allowPublicKeyRetrieval="true"
-                    zeroDateTimeBehavior="CONVERT_TO_NULL"/>
+                    databaseName="${database.name}" user="${database.user}" password="${database.password}"/>
     </dataSource>
 
     <jpa>

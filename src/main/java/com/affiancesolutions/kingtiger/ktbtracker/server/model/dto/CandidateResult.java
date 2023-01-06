@@ -28,6 +28,8 @@ public class CandidateResult implements Serializable {
 
     private String displayName;
 
+    private String email;
+
     /**
      * Object Relationship Mapping (ORM) many-to-one relationship to the cycle (Cycle).
      */
@@ -92,6 +94,7 @@ public class CandidateResult implements Serializable {
         this.id = candidate.getId();
         this.userId = candidate.getUser().getUserId();
         this.displayName = candidate.getUser().getDisplayName();
+        this.email = candidate.getUser().getEmail();
         this.personNameComponents = new PersonNameComponents(candidate.getUser().getDisplayName());
         this.cycleId = candidate.getCycle().getId();
         this.cycleCont = candidate.getCycleCont();
@@ -128,6 +131,14 @@ public class CandidateResult implements Serializable {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getCycleId() {

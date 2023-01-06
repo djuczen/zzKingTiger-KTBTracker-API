@@ -26,14 +26,14 @@ public interface CyclesService {
     public Response getCurrentCycle() throws IOException;
 
     @GET
-    @Path("{cycleId}")
+    @Path("{cycle_id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCycle(
             @PathParam(PARAM_CYCLE_ID) @DefaultValue(ZERO) Long cycleId
     ) throws IOException;
 
     @PUT
-    @Path("{cycleId}")
+    @Path("{cycle_id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateCycle(
@@ -42,7 +42,7 @@ public interface CyclesService {
     ) throws IOException;
 
     @DELETE
-    @Path("{cycleId}")
+    @Path("{cycle_id}")
     public Response deleteCycle(
             @PathParam(PARAM_CYCLE_ID) @DefaultValue(ZERO) Long cycleId
     ) throws IOException;

@@ -13,7 +13,7 @@ public interface Constants {
     String PARAM_CURRENT = "current";
     String PARAM_CYCLE_ID = "cycle";
     String PARAM_FROM_DATE = "from_date";
-    String PARAM_GROUP_NAME = "groupName";
+    String PARAM_GROUP_NAME = "group";
     String PARAM_ME = "me";
     String PARAM_SCOPE = "scope";
     String PARAM_TO_DATE = "to_date";

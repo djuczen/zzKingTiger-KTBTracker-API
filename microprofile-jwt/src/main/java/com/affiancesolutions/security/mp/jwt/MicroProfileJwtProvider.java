@@ -1,12 +1,15 @@
-package com.affiancesolutions.kingtiger.ktbtracker.server.auth;
+package com.affiancesolutions.security.mp.jwt;
 
-import com.affiancesolutions.kingtiger.ktbtracker.server.auth.impl.MicroProfileJsonWebTokenImpl;
-import com.affiancesolutions.kingtiger.ktbtracker.server.auth.impl.MicroProfileSecurityContextImpl;
+import com.affiancesolutions.security.mp.jwt.impl.MicroProfileJsonWebTokenImpl;
+import com.affiancesolutions.security.mp.jwt.impl.MicroProfileSecurityContextImpl;
 import com.google.firebase.auth.FirebaseAuthException;
 import jakarta.annotation.Priority;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ws.rs.Priorities;
-import jakarta.ws.rs.container.*;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.container.PreMatching;
+import jakarta.ws.rs.container.ResourceInfo;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
@@ -18,12 +21,12 @@ import org.jose4j.jwt.consumer.InvalidJwtException;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-//@Provider
-//@PreMatching
-//@Priority(Priorities.AUTHENTICATION)
-public class KTBTrackerAuthorization implements ContainerRequestFilter {
+@Provider
+@PreMatching
+@Priority(Priorities.AUTHENTICATION)
+public class MicroProfileJwtProvider implements ContainerRequestFilter {
 
-    private static final String CLASS_NAME = KTBTrackerAuthorization.class.getName();
+    private static final String CLASS_NAME = MicroProfileJwtProvider.class.getName();
 
     private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
 
@@ -75,8 +78,8 @@ public class KTBTrackerAuthorization implements ContainerRequestFilter {
                     }
 
                     Response response = Response.status(Response.Status.UNAUTHORIZED)
-                                    .header(HttpHeaders.WWW_AUTHENTICATE, BEARER_REALM)
-                                            .build();
+                            .header(HttpHeaders.WWW_AUTHENTICATE, BEARER_REALM)
+                            .build();
 
                     LOGGER.exiting(CLASS_NAME, METHOD_NAME, "Unauthorized");
                     requestContext.abortWith(response);

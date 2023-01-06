@@ -60,14 +60,14 @@ public interface UsersService {
     ) throws IOException;
 
     @PUT
-    @Path("{userid}/groups/{groupName}")
+    @Path("{userid}/groups/{group}")
     public void addGroupForUser(
             @PathParam(PARAM_USERID) String userid,
             @PathParam(PARAM_GROUP_NAME) String groupName
     );
 
     @DELETE
-    @Path("{userid}/groups/{groupName}")
+    @Path("{userid}/groups/{group}")
     public void removeGroupForUser(
             @PathParam(PARAM_USERID) String userid,
             @PathParam(PARAM_GROUP_NAME) String groupName

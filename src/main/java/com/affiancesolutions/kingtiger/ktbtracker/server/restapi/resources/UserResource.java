@@ -1,11 +1,15 @@
 package com.affiancesolutions.kingtiger.ktbtracker.server.restapi.resources;
 
+import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.UserRecordResult;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.UserResult;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.User;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.entity.UserGroup;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UserGroupsDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dao.UsersDAO;
 import com.affiancesolutions.kingtiger.ktbtracker.server.model.dto.ErrorStatus;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -15,6 +19,8 @@ import jakarta.ws.rs.core.*;
 import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -69,9 +75,23 @@ public class UserResource {
     @RolesAllowed(ALL_AUTHENTICATED)
     public Response getUser(
             @PathParam(PARAM_USERID) String userid
-    ) throws IOException {
+    ) throws IOException, FirebaseAuthException {
         final String METHOD_NAME = "getUser";
         LOGGER.entering(CLASS_NAME, METHOD_NAME, userid);
+
+        UserRecord userRecord = FirebaseAuth.getInstance().getUser(userid);
+        LOGGER.finer("uid: " + userRecord.getUid());
+        LOGGER.finer("displayName: " + userRecord.getDisplayName());
+        LOGGER.finer("email: " + userRecord.getEmail());
+        LOGGER.finer("phoneNumber: " + userRecord.getPhoneNumber());
+        LOGGER.finer("photoUrl: " + userRecord.getPhotoUrl());
+        LOGGER.finer("providerId: " + userRecord.getProviderId());
+        LOGGER.finer("tenantId: " + userRecord.getTenantId());
+        LOGGER.finer("customClaims: " + userRecord.getCustomClaims().toString());
+        LOGGER.finer("providerData: " + userRecord.getProviderData().toString());
+        LOGGER.finer("tokenValidAfterTimestamp: " + String.valueOf(userRecord.getTokensValidAfterTimestamp()));
+        LOGGER.finer("tokenValidAfterTimestamp: " + Instant.ofEpochMilli(userRecord.getTokensValidAfterTimestamp()));
+
 
         if (user == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
@@ -80,9 +100,10 @@ public class UserResource {
         }
 
         UserResult result = new UserResult(user);
+        UserRecordResult userRecordResult = new UserRecordResult(userRecord);
 
         LOGGER.exiting(CLASS_NAME, METHOD_NAME, result);
-        return Response.ok(result).build();
+        return Response.ok(userRecordResult).build();
     }
 
     /**
@@ -170,7 +191,7 @@ public class UserResource {
      * @return
      */
     @PUT
-    @Path("groups/{groupName}")
+    @Path("groups/{group}")
     @RolesAllowed(ALL_AUTHENTICATED)
     @Transactional
     public Response addGroupForUser(
@@ -209,7 +230,7 @@ public class UserResource {
      * @return
      */
     @DELETE
-    @Path("groups/{groupName}")
+    @Path("groups/{group}")
     @RolesAllowed(ALL_AUTHENTICATED)
     @Transactional
     public Response removeGroupForUser(

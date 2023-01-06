@@ -7,6 +7,7 @@ import com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.model.Ver
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.ibm.websphere.crypto.PasswordUtil;
+import jakarta.annotation.security.DenyAll;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.enterprise.context.RequestScoped;
@@ -26,10 +27,10 @@ import static com.affiancesolutions.kingtiger.ktbtracker.server.Constants.*;
 import static com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.Constants.PARAM_EMAIL;
 import static com.affiancesolutions.kingtiger.ktbtracker.server.restapi.proxy.Constants.PARAM_PASSWORD;
 
-@SimplyTimed
+
 @RequestScoped
 @Path("/auth")
-@jakarta.annotation.security.PermitAll
+@DenyAll
 public class AuthResource {
 
     private static final String CLASS_NAME = AuthResource.class.getName();
@@ -38,6 +39,9 @@ public class AuthResource {
 
     @Context
     private SecurityContext securityContext;
+
+    @Inject
+    private JsonWebToken jsonWebToken;
 
     @Inject
     @RestClient
@@ -86,7 +90,7 @@ public class AuthResource {
     }
 
     @POST
-    @Path("signUp")
+    @Path("signUpNewUser")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON)
     @PermitAll
@@ -127,10 +131,10 @@ public class AuthResource {
     @GET
     @Path("getAccountInfo")
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({ROLE_ADMIN, ROLE_CANDIDATE})
+    @RolesAllowed(ALL_AUTHENTICATED)
     public Response getAccountInfo() throws FirebaseAuthException {
         final String METHOD_NAME = "getAccountInfo";
-        LOGGER.entering(CLASS_NAME, METHOD_NAME);
+        LOGGER.entering(CLASS_NAME, METHOD_NAME, jsonWebToken);
         JsonWebToken jsonWebToken = (JsonWebToken) securityContext.getUserPrincipal();
 
         GetAccountInfoRequest getAccountInfoRequest = new GetAccountInfoRequest();
